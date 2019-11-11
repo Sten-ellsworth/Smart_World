@@ -1,32 +1,301 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <body>
-    <div class="row content">
-        <div class="col-sm-2 sidenav bg-secondary">
-            <p>side navigatie te zien op mockup</p>
-        </div>
 
-        <div class="col-sm card text-left">
-            <h1>Plekken beschikbaar:</h1>
-            <p>Hier zetten we straks de data hoeveel parkeerplekken er parkeerplekken beschikbaar zijn</p>
-        </div>
-        <div class="col-sm card text-left">
-            <h1>Is er nog plek:</h1>
-            <p>Hier zetten we straks de data of er parkeerplekken zijn</p>
-        </div>
+<!-- #1 row -->
+<!-- 
+Inhoud:
+- Logo & gele menu
+- Lege kolom
+- Hoeveel plekken zijn er?
+- Is er nog plek?
+- lege kolom
+ -->
+<div class="row">
+
+    <!-- Logo & gele menu -->
+    <div class="col-sm-2" style="background-color:#ffe067;">
+        <center><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.surfconext.nl%2Flogos%2Fidp%2Fwindesheim.png&f=1&nofb=1"></center>
     </div>
-    <div class="row">
-        <div class="container">
-            <div class="col-sm text-left">
-                <h1>Grafiek:</h1>
-                <p>Grafiekdata per maand/jaar/dag</p>
+
+    <!-- Lege kolom -->
+    <div class="col-sm-1" style="background-color:#E9ECEF;">
+    </div>
+    
+    <!-- Hoeveel plekken zijn er? -->
+    <div class="col-sm-4" style="background-color:#E9ECEF;">
+        <br>
+        <br>
+        <center>
+        <b>
+        <p>Hoeveel plekken zijn er?</p>
+        </b>
+        <p style="font-size:200%"> 20</p>
+        </center>
+    </div>
+    <!-- Is er nog plek? -->
+    <div class="col-sm-4" style="background-color:#E9ECEF;">
+        <br>
+        <br>
+        <center>
+        <b>
+        <p>Parkeergarage Windesheim Flevoland</p>
+        {% for sensor in sensors %}
+        {% if sensor.sensor_1 == '1' %}
+        <button type="button" class="btn btn-success">Leeg</button>
+        {% else %}
+        <button type="button" class="btn btn-danger">vol</button>
+        {% endif %}
+        {% endfor %}
+
+        </b>
+        </center>
+        <br><br>
+    </div>
+
+    <!-- Lege kolom -->
+    <div class="col-sm-1" style="background-color:#E9ECEF;">
+    </div>
+
+</div>
+
+<!-- #2 row -->
+<!-- 
+Inhoud:
+- Gele menu & titel: "Parkeerplaats dashboard"
+- Hr streep
+ -->
+<div class="row">
+
+    <!-- Gele menu & titel: "Parkeerplaats dashboard"-->
+    <div class="col-sm-2" style="background-color:#ffe067;">
+        <p>
+        <center>
+        <p>Parkeerplaats
+        <br>    
+            dashboard</p>
+        </center>
+        </p>
+    </div>
+
+    <!-- Hr streep -->
+    <div class="col-sm-10"><br><hr></div>
+
+</div>
+
+<!-- #3 row -->
+<!-- 
+Inhoud:
+- Gele menu
+- Periode selecteren
+- Grafiek
+ -->
+<div class="row">
+
+    <!-- Gele menu -->
+    <div class="col-sm-2" style="background-color:#ffe067;">
+    </div>
+
+    <!-- Periode selecteren -->
+    <div class="col-sm-4">
+        <div class="jumbotron">
+            <center><p><b>Selecteer periode:</b></p></center>
+            <!-- Collapse menu -->
+                <div class="container">
+                        <div id="accordion">
+                            <div class="card">
+                              <div class="card-header">
+                                  <!-- Per dag selecteren -->
+                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                    <p style="color:black;"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff1%2FMediaWiki_Vector_skin_action_arrow.svg%2F768px-MediaWiki_Vector_skin_action_arrow.svg.png&f=1&nofb=1" style="width:25px;height:25px;"> Per dag</p>
+                                </a>
+                              </div>
+                              <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                        <p>Jaar:</p>
+                                        <select class="custom-select">
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                        <p>Maand:</p>
+                                        <select class="custom-select">
+                                            <option value="Januari">Januari</option>
+                                            <option value="Februari">Februari</option>
+                                            <option value="Maart">Maart</option>
+                                            <option value="April">April</option>
+                                            <option value="Mei">Mei</option>
+                                            <option value="Juni">Juni</option>
+                                            <option value="Juli">Juli</option>
+                                            <option value="Augustus">Augustus</option>
+                                            <option value="September">September</option>
+                                            <option value="Oktober">Oktober</option>
+                                            <option value="Novemeber">Novemeber</option>
+                                            <option value="December">December</option>
+                                        </select>
+                                        <p>Dag:</p>
+                                        <select class="custom-select">
+                                            <option value="1">1</option>
+                                            <option value="1">2</option>
+                                            <option value="1">3</option>
+                                            <option value="1">4</option>
+                                            <option value="1">5</option>
+                                            <option value="1">6</option>
+                                            <option value="1">7</option>
+                                            <option value="1">8</option>
+                                            <option value="1">9</option>
+                                            <option value="1">10</option>
+                                            <option value="1">12</option>
+                                            <option value="1">13</option>
+                                            <option value="1">14</option>
+                                            <option value="1">15</option>
+                                            <option value="1">16</option>
+                                            <option value="1">17</option>
+                                            <option value="1">18</option>
+                                            <option value="1">19</option>
+                                            <option value="1">20</option>
+                                            <option value="1">21</option>
+                                            <option value="1">22</option>
+                                            <option value="1">23</option>
+                                            <option value="1">24</option>
+                                            <option value="1">25</option>
+                                            <option value="1">26</option>
+                                            <option value="1">27</option>
+                                            <option value="1">28</option>
+                                            <option value="1">29</option>
+                                            <option value="1">30</option>
+                                            <option value="1">31</option>
+                                                                                                
+                                        </select>
+                                    <br>
+                                    <br>
+                                        <button type="button" class="btn btn-warning">Zoeken</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header">
+                                  <!-- Per week selecteren -->
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                    <p style="color:black;"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff1%2FMediaWiki_Vector_skin_action_arrow.svg%2F768px-MediaWiki_Vector_skin_action_arrow.svg.png&f=1&nofb=1" style="width:25px;height:25px;"> Per week</p>
+                              </a>
+                              </div>
+                              <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                        <p>Jaar:</p>
+                                        <select class="custom-select">
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                        <p>Maand:</p>
+                                        <select class="custom-select">
+                                            <option value="Januari">Januari</option>
+                                            <option value="Februari">Februari</option>
+                                            <option value="Maart">Maart</option>
+                                            <option value="April">April</option>
+                                            <option value="Mei">Mei</option>
+                                            <option value="Juni">Juni</option>
+                                            <option value="Juli">Juli</option>
+                                            <option value="Augustus">Augustus</option>
+                                            <option value="September">September</option>
+                                            <option value="Oktober">Oktober</option>
+                                            <option value="Novemeber">Novemeber</option>
+                                            <option value="December">December</option>
+                                        </select>
+                                        <p>Week:</p>
+                                        <select class="custom-select">
+                                            <option value="">30 okt- 3 jan</option>
+                                        </select>
+                                    <br>
+                                    <br>
+                                        <button type="button" class="btn btn-warning">Zoeken</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                              <div class="card-header">
+                                  <!-- Per maand selecteren -->
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                        <p style="color:black;"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff1%2FMediaWiki_Vector_skin_action_arrow.svg%2F768px-MediaWiki_Vector_skin_action_arrow.svg.png&f=1&nofb=1" style="width:25px;height:25px;"> Per maand</p>
+                                </a>
+                              </div>
+                              <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                        <p>Jaar:</p>
+                                        <select class="custom-select">
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                        <p>Maand:</p>
+                                        <select class="custom-select">
+                                            <option value="Januari">Januari</option>
+                                            <option value="Februari">Februari</option>
+                                            <option value="Maart">Maart</option>
+                                            <option value="April">April</option>
+                                            <option value="Mei">Mei</option>
+                                            <option value="Juni">Juni</option>
+                                            <option value="Juli">Juli</option>
+                                            <option value="Augustus">Augustus</option>
+                                            <option value="September">September</option>
+                                            <option value="Oktober">Oktober</option>
+                                            <option value="Novemeber">Novemeber</option>
+                                            <option value="December">December</option>
+                                        </select>
+                                    <br>
+                                    <br>
+                                        <button type="button" class="btn btn-warning">Zoeken</button>
+                                </div>
+                              </div>
+                            </div>
+                                <div class="card">
+                              <div class="card-header">
+                                  <!-- Per jaar selecteren -->
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                                        <p style="color:black;"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff1%2FMediaWiki_Vector_skin_action_arrow.svg%2F768px-MediaWiki_Vector_skin_action_arrow.svg.png&f=1&nofb=1" style="width:25px;height:25px;"> Per jaar</p>
+                              </a>
+                              </div>
+                              <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                        <p>Jaar:</p>
+                                        <select class="custom-select">
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    <br>
+                                    <br>
+                                        <button type="button" class="btn btn-warning">Zoeken</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    
+    <!-- Grafiek -->
+    <div class="col-sm-5">
+        <div class="jumbotron">
+        <p>(Hier komt de grafiek)</p>
+        </div>
     </div>
-        <footer class="container-fluid text-center">
-            <p>Footer Text</p>
-        </footer>
-    </body>
-    </html>
+</div>
+
+<!-- #4 row -->
+<!-- 
+Inhoud:
+- Gele menu
+- Wit regels
+ -->
+<div class="row">
+
+    <!-- Gele menu -->
+    <div class="col-sm-2" style="background-color:#ffe067;">
+        <br>
+    </div>
+    
+    <!-- Wit regels -->
+    <div class="col-sm-10">
+    </div
+
+</div>
+
 {% endblock %}
+

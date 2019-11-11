@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from .models import Sensordata
+from .models import Sensors
 
 
 def index(request):
-    sensordata = Sensordata.objects.all()
-    return render(request, "index.html", {'sensordata': sensordata})
+    sensors = Sensors.objects.all()
+    return render(request, "index.html", {'sensors': sensors})
 
-
-def data(request):
-    sensordata = Sensordata.objects.all()
-    return render(request, "data.html", {'sensordata': sensordata})
 
