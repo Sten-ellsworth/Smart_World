@@ -12,51 +12,44 @@ Inhoud:
 <div class="row">
 
     <!-- Logo & gele menu -->
-    <div class="col-sm-2" style="background-color:#ffe067;">
-        <center><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.surfconext.nl%2Flogos%2Fidp%2Fwindesheim.png&f=1&nofb=1"></center>
-    </div>
-
-    <!-- Lege kolom -->
-    <div class="col-sm-1" style="background-color:#E9ECEF;">
-    </div>
-    
-    <!-- Hoeveel plekken zijn er? -->
-    <div class="col-sm-4" style="background-color:#E9ECEF;">
-        <br>
-        <br>
-        <center>
-        <b>
-        <p>Plaatsen bezet</p>
-        </b>
-        {% for sensor in sensors %}
-        <p style="font-size:200%"> {{sensor.sensor_1}}/1</p>
-        {% endfor %}
+    <div class="col-2" style="background-color:#ffe067;">
+        <center><img
+                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.surfconext.nl%2Flogos%2Fidp%2Fwindesheim.png&f=1&nofb=1">
         </center>
     </div>
+
+
     <!-- Is er nog plek? -->
-    <div class="col-sm-4" style="background-color:#E9ECEF;">
+    <div class="col-4 text-center" style="background-color:#E9ECEF;">
         <br>
         <br>
-        <center>
         <b>
-        <p>Parkeergarage Windesheim Flevoland</p>
-        {% for sensor in sensors %}
-        {% if sensor.sensor_1 == '1' %}
-        <button type="button" class="btn btn-success">Vrij</button>
-        <button type="button" class="btn btn-secondary" disabled>Vol</button>
-        {% else %}
-        <button type="button" class="btn btn-secondary" disabled>Vrij</button>
-        <button type="button" class="btn btn-danger">Vol</button>
-        {% endif %}
-        {% endfor %}
-
+            <div class="center">
+                <p>Parkeergarage Windesheim Flevoland</p>
+                {% for sensor in sensors %}
+                {% if sensor.sensor_1 == '1' %}
+                <button type="button" class="btn btn-success btn-lg">Vrij</button>
+                <button type="button" class="btn btn-secondary btn-lg" disabled>Vol</button>
+                {% else %}
+                <button type="button" class="btn btn-secondary btn-lg" disabled>Vrij</button>
+                <button type="button" class="btn btn-danger btn-lg">Vol</button>
+                {% endif %}
+                {% endfor %}
+            </div>
         </b>
-        </center>
         <br><br>
     </div>
 
-    <!-- Lege kolom -->
-    <div class="col-sm-1" style="background-color:#E9ECEF;">
+    <!-- Hoeveel plekken zijn er? -->
+    <div class="col-6 text-center" style="background-color:#E9ECEF;">
+        <br>
+        <br>
+            <b>
+                <p>Plaatsen bezet</p>
+            </b>
+            {% for sensor in sensors %}
+            <p style="font-size:200%"> {{sensor.sensor_1}}/1</p>
+            {% endfor %}
     </div>
 
 </div>
@@ -67,21 +60,11 @@ Inhoud:
 - Gele menu & titel: "Parkeerplaats dashboard"
 - Hr streep
  -->
-<div class="row">
 
-    <!-- Gele menu & titel: "Parkeerplaats dashboard"-->
-    <div class="col-sm-2" style="background-color:#ffe067;">
-        <p>
-        <center>
-        <p>Parkeerplaats
-        <br>    
-            dashboard</p>
-        </center>
-        </p>
-    </div>
-
-    <!-- Hr streep -->
-    <div class="col-sm-10"><br><hr></div>
+<!-- Hr streep -->
+<div class="col-sm-10"><br>
+    <hr>
+</div>
 
 </div>
 

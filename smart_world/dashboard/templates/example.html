@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for data in sensordata %}
- {{ data.sensorvalues }}
-{% endfor %}
 <!-- #1 row -->
 <!-- 
 Inhoud:
@@ -41,13 +38,15 @@ Inhoud:
         <center>
         <b>
         <p>Parkeergarage Windesheim Flevoland</p>
-        {% for sensor in sensors %}
-        {% if sensor.sensor_1 == '1' %}
-        <button type="button" class="btn btn-success">Leeg</button>
-        {% else %}
-        <button type="button" class="btn btn-danger">vol</button>
-        {% endif %}
-        {% endfor %}
+                {% for sensor in sensors %}
+                {% if sensor.sensor_1 == '1' %}
+                <button type="button" class="btn btn-success btn-lg">Vrij</button>
+                <button type="button" class="btn btn-secondary btn-lg" disabled>Vol</button>
+                {% else %}
+                <button type="button" class="btn btn-secondary btn-lg" disabled>Vrij</button>
+                <button type="button" class="btn btn-danger btn-lg">Vol</button>
+                {% endif %}
+                {% endfor %}
 
         </b>
         </center>
