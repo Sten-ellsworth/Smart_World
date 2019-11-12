@@ -80,7 +80,7 @@ DATABASES = {
             'NAME': 'sensordata',
             'USER': 'root',
             'PASSWORD': "",
-            'HOST': '',
+            'HOST': '127.0.0.1',
             'PORT': '',
         }
 }
