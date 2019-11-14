@@ -79,12 +79,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
             'NAME': 'sensordata',
             'USER': 'root',
-            'PASSWORD': "",
-            'HOST': '127.0.0.1',
+            'PASSWORD': 'root',
+            'HOST': '172.20.10.2',
             'PORT': '',
         }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
