@@ -26,14 +26,11 @@ Inhoud:
         <b>
             <div class="center">
                 <p>Parkeergarage Windesheim Flevoland</p>
-                {% for sensor in sensors %}
-
-<!--                {% if sensor.sensorvalue == 1 %}-->
-<!--                <button type="button" class="h-100 btn btn-success btn-lg">Vrij</button>-->
-<!--                {% else %}-->
-<!--                <button type="button" class="btn btn-danger btn-lg">Vol</button>-->
-<!--                {% endif %}-->
-                {% endfor %}
+                {% if empty_or_full_value %}
+                <button type="button" class="h-100 btn btn-success btn-lg">Vrij</button>
+                {% else %}
+                <button type="button" class="btn btn-danger btn-lg">Vol</button>
+                {% endif %}
             </div>
         </b>
         <br><br>
@@ -46,9 +43,7 @@ Inhoud:
             <b>
                 <p>Plaatsen bezet</p>
             </b>
-<!--            {% for sensor in sensors %}-->
-<!--            <p style="font-size:200%"> {{sensor.sensor_1}}/1</p>-->
-<!--            {% endfor %}-->
+            <p style="font-size:200%"> {{empty_or_full_value|length}}/{{sensors.count}}</p>
     </div>
 
 </div>
@@ -66,13 +61,6 @@ Inhoud:
 </div>
 
 </div>
-<!--                {% if sensor.sensor_ID == 1 %}-->
-<!--                <button type="button" class="h-100 btn btn-success btn-lg">Vrij</button>-->
-<!--                <button type="button" class="btn btn-secondary btn-lg" disabled>Vol</button>-->
-<!--                {% else %}-->
-<!--                <button type="button" class="btn btn-secondary btn-lg" disabled>Vrij</button>-->
-<!--                <button type="button" class="btn btn-danger btn-lg">Vol</button>-->
-<!--                {% endif %}-->
 
 {% endblock %}
 
