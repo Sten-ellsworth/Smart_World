@@ -1,25 +1,19 @@
+import datetime
+
+from django.db.models import Model, NOT_PROVIDED, DateTimeField
 from django.db import models
 
 # Create your models here.
+class sensorData(models.Model):
+    sensorValues = models.IntegerField()
+    created_at = models.DateTimeField(auto_now=True)
+    sensor_ID = models.IntegerField()
 
+    def save(self):
+        if self.created_at == None:
+            self.created_at = datetime.now()
+            super(sensorData, self).save()
 
-class Datasensor(models.Model):
-    sensor_id = models.IntegerField(db_column='sensor_ID')  # Field name made lowercase.
-    sensorvalues = models.IntegerField()
-    timer = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'datasensor'
-
-
-
-class Sensors(models.Model):
-    sensor_id = models.AutoField(db_column='sensor_ID', primary_key=True)  # Field name made lowercase.
-    sensorvalue = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'sensors'
-
-
+class sensors(models.Model):
+    sensor_ID = models.IntegerField()
+    sensorValue = models.IntegerField()
