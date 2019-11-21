@@ -15,8 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from dashboard import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dashboard/',  include('dashboard.urls')),
+    path('', include('dashboard.urls')),
+    # from here all the data from the sensor
+    path('sensor_data/', views.getList),
+    path('sensor_data/<int:pk>', views.detailList),
+    path('sensor_data/put/<int:pk>', views.detailList),
+    path('sensor_data/post/', views.postList),
+    # from here all the urls from a specific sensor
+    path('sensor/', views.sensorList),
+    path('sensor/detail/<int:pk>', views.sensorDetail),
+    path('sensor/put/<int:pk>', views.sensorDetail),
+    path('sensor/post/', views.sensorPost)
+
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
