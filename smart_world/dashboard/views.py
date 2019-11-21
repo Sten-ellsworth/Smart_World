@@ -81,7 +81,7 @@ def sensorDetail(request, pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = sensorDataSerializer(sensor, data=request.data)
+        serializer = sensorsSerializer(sensor, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -90,7 +90,7 @@ def sensorDetail(request, pk):
 @api_view(['POST'])
 def sensorPost(request):
     if request.method == 'POST':
-        serializer = sensorDataSerializer(data=request.data)
+        serializer = sensorsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
