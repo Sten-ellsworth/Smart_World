@@ -77,13 +77,9 @@ WSGI_APPLICATION = 'smart_world.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'sensordata',
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'HOST': '172.20.10.2',
-            'PORT': '',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # Password validation
