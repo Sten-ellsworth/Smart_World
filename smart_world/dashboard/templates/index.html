@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load staticfiles %}
 <!-- #1 row -->
 <!-- 
 Inhoud:
@@ -9,41 +10,40 @@ Inhoud:
 - Is er nog plek?
 - lege kolom
  -->
+   
+
 <div class="row">
 
     <!-- Logo & gele menu -->
     <div class="col-2" style="background-color:#ffe067;">
-        <center><img
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.surfconext.nl%2Flogos%2Fidp%2Fwindesheim.png&f=1&nofb=1">
+        <center>
+            <img src= "{% static 'images/wf.png' %}" alt="Text to display if image is not found">
         </center>
     </div>
 
 
     <!-- Is er nog plek? -->
     <div class="col-4 text-center" style="background-color:#E9ECEF;">
-        <br>
-        <br>
-        <b>
-            <div class="center">
-                <p>Parkeergarage Windesheim Flevoland</p>
+            <div class="center" style="margin-top: 30px;">
+                <p><strong>Parkeergarage Windesheim Flevoland</strong></p>
                 {% if empty_or_full_value %}
-                <button type="button" class="h-100 btn btn-success btn-lg">Vrij</button>
+                <button type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij</button>
                 {% else %}
-                <button type="button" class="btn btn-danger btn-lg">Vol</button>
+                <button type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol</button>
                 {% endif %}
             </div>
-        </b>
-        <br><br>
     </div>
 
     <!-- Hoeveel plekken zijn er? -->
     <div class="col-6 text-center" style="background-color:#E9ECEF;">
-        <br>
-        <br>
-            <b>
-                <p>Plaatsen bezet</p>
-            </b>
-            <p style="font-size:200%"> {{empty_or_full_value|length}}/{{sensors.count}}</p>
+        <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
+            <strong>
+                <p>Plaatsen beschikbaar</p>
+            </strong>
+            <div class="available">
+            <p style="font-size:200%">{{empty_or_full_value|length}}/{{sensors.count}}</p>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -56,11 +56,7 @@ Inhoud:
  -->
 
 <!-- Hr streep -->
-<div class="col-sm-10"><br>
-    <hr>
-</div>
 
-</div>
 
 {% endblock %}
 
