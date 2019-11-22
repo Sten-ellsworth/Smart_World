@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load staticfiles %}
 <!-- #1 row -->
 <!-- 
 Inhoud:
@@ -9,14 +10,15 @@ Inhoud:
 - Is er nog plek?
 - lege kolom
  -->
-<div class="container-fluid">
+   
+
 <div class="row">
 
     <!-- Logo & gele menu -->
     <div class="col" style="background-color:#4f4f4f;">
-        <div class="text-center">
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.surfconext.nl%2Flogos%2Fidp%2Fwindesheim.png&f=1&nofb=1%22%3E">
-        </div>
+        <center>
+            <img src= "{% static 'images/wf.png' %}" alt="Text to display if image is not found">
+        </center>
     </div>
 </div>
 <div class="row">
@@ -35,7 +37,7 @@ Inhoud:
     <div class="col-6 text-center">
         <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
                 <h3><strong>Plaatsen beschikbaar</strong></h3>
-            <p style="font-size:200%"> {{empty_or_full_value.count}}/{{sensors.count}}</p>
+            <p style="font-size:200%"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
 </div>
@@ -50,11 +52,7 @@ Inhoud:
  -->
 
 <!-- Hr streep -->
-<div class=" fixed-bottom col-sm-13">
-    <hr>
-</div>
 
-</div>
 
 
 {% endblock %}
