@@ -67,22 +67,23 @@ def sensorList(request):
 
 
 @api_view(['GET', 'PUT'])
-def sensorDetail(request, pk):
+def sensorDetail(request, sensor_id):
     try:
-        sensor = Sensors.objects.get(pk=pk)
+        sensor_id = Sensors.objects.get(sensor_ID=sensor_id)
     except Sensors.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = SensorsSerializer(sensor)
+        serializer = SensorsSerializer(sensor_id)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = SensorsSerializer(sensor, data=request.data)
+        serializer = SensorsSerializer(sensor_id, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 def sensorPost(request):
