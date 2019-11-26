@@ -29,8 +29,8 @@ urlpatterns = [
     path('sensor_data/post/', views.postList),
     # from here all the urls from a specific sensor
     path('sensor/', views.sensorList),
-    path('sensor/detail/<int:pk>', views.sensorDetail),
-    path('sensor/put/<int:pk>', views.sensorDetail),
+    path('sensor/<int:sensor_id>/', views.sensorDetail),
+    path('sensor/put/<int:sensor_id>/', views.sensorDetail),
     path('sensor/post/', views.sensorPost)
 
 ]
