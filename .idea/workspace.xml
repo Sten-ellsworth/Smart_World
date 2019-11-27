@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/smart_world/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/smart_world/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1574329268864</updated>
       <workItem from="1574329274091" duration="10597000" />
-      <workItem from="1574778226631" duration="271000" />
+      <workItem from="1574778226631" duration="901000" />
     </task>
     <servers />
   </component>
