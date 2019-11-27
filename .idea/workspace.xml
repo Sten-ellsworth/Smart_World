@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/chart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/db.sqlite3" afterDir="false" />
