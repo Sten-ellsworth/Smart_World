@@ -17,10 +17,6 @@ class SensorData(models.Model):
             self.created_at = datetime.now()
             super(SensorData, self).save(*args, **kwargs)
 
-    # x = '2014-09-23T18:43:26.692Z'
-    # y = dateparse.parse_datetime(x)
-
-
 class Sensors(models.Model):
     sensor_ID = models.IntegerField()
     sensorValue = models.IntegerField()
