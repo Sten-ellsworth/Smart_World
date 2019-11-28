@@ -14,7 +14,7 @@ class Graph:
     def addParkingAvailable(self):
 
         sensor_data = {
-          "parkingspots": self.available
+          "availability": self.available
             }
         graph = urequests.post('http://172.20.10.2:8080/graph/post/', json=sensor_data)
         graph.close()
