@@ -3,8 +3,9 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime
 from .models import SensorData, Sensors, Graph
-from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
+from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer, ChartFilter
 from django.shortcuts import render
 
 
@@ -15,15 +16,23 @@ def index(request):
     # this value gets all of empty values out off the database
     empty_or_full_value = Sensors.objects.filter(sensorValue=1)
     # graph query with date
-    graphQuery = Graph.objects.filter(created_at__contains=('2019-11-28'))
+    chart = Graph.objects.all()
+    chart = ChartFilter(request.GET, queryset=chart)
 
     data = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
-        'graphQuery': graphQuery
+        'filter': chart
     }
 
     return render(request, "index.html", data)
+
+def search(request):
+    submitted = 'submitted' in request.GET
+    data = request.GET if submitted else Graph.objects.filter(pub_date__gte=datetime.date.today())
+    people = ChartFilter(data, queryset=Graph.objects.all())
+
+    return render(request, 'test.html', {'filter': people})
 
 
 @api_view(['GET'])

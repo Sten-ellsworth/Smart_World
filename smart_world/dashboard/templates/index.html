@@ -5,24 +5,31 @@
 <div class="row">
     <div class="col" style="background-image:url('{% static 'images/background_picture.png' %}');">
         <center>
-            <img src= "{% static 'images/Windesheim_logo.png' %}" height="150" width="250" alt="Text to display if image is not found">
+            <img src="{% static 'images/Windesheim_logo.png' %}" height="150" width="250"
+                 alt="Text to display if image is not found">
         </center>
     </div>
 </div>
 <div class="row">
     <div class="col-6 text-center">
-            <div class="center border-right" style="margin-top: 30px;">
-                <h3 style="font-family:Roboto;"><strong>Parkeergarage Windesheim Flevoland</strong></h3>
-                {% if empty_or_full_value %}
-                <button style="font-family:Roboto;" type="button" class="btn btn-success" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">Vrij</button>
-                {% else %}
-                <button type="button" class="btn btn-danger" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">Vol</button>
-                {% endif %}
-            </div>
+        <div class="center border-right" style="margin-top: 30px;">
+            <h3 style="font-family:Roboto;"><strong>Parkeergarage Windesheim Flevoland</strong></h3>
+            {% if empty_or_full_value %}
+            <button style="font-family:Roboto;" type="button" class="btn btn-success"
+                    style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">
+                Vrij
+            </button>
+            {% else %}
+            <button type="button" class="btn btn-danger"
+                    style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">
+                Vol
+            </button>
+            {% endif %}
+        </div>
     </div>
     <div class="col-6 text-center">
         <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
-                <h3 style="font-family:Roboto;"></h3style><strong>Plaatsen beschikbaar</strong></h3>
+            <h3 style="font-family:Roboto;"></h3style><strong>Plaatsen beschikbaar</strong></h3>
             <p style="font-size:200%; font-family:Roboto;"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
@@ -31,6 +38,10 @@
 
 <hr>
 <!--Grafiek-->
+<form method="get">
+        {{ filter.form.as_p }}
+        <button type="submit">Search</button>
+    </form>
 <p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
 <div id="ParkeerGrafiek">
     <div class="chart-container" style="position: relative; height:10vh; width:50vw">
@@ -41,10 +52,12 @@
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [{% for graph in graphQuery %}'{{graph.created_at}}',{%endfor %}],
+                    labels: [{% for graph in filter.qs %}'{{graph.created_at}}',{%endfor %}
+            ],
             datasets: [{
                 label: 'Parking availability',
-                data: [{% for graph in graphQuery %}{{graph.availability}},{%endfor %}],
+                data: [{% for graph in filter.qs %}{{graph.availability}},{%endfor %}
+            ],
 
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

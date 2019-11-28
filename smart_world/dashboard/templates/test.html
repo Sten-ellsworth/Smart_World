@@ -1,0 +1,19 @@
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit" name="submitted">Search</button>
+                     <!-- ^^^^ added 'name' parameter -->
+</form>
+
+{% if filter.is_bound %}
+<table>
+{% for field in filter.qs %}
+  <tr>
+    <td>
+      {{ field.created_at }}
+    </td>
+  </tr>
+  {% endfor %}
+    {% endif %}
+</table>
+</body>
+</html>
