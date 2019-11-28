@@ -5,25 +5,27 @@
 <div class="row">
 
     <div class="col" style="background-color:#4f4f4f;">
-        <center>
-            <img src= "{% static 'images/wf.png' %}" alt="Text to display if image is not found">
-        </center>
+        <img src="{% static 'images/wf.png' %}" alt="Text to display if image is not found">
     </div>
 </div>
 <div class="row">
     <div class="col-6 text-center">
-            <div class="center border-right" style="margin-top: 30px;">
-                <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
-                {% if empty_or_full_value %}
-                <button type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij</button>
-                {% else %}
-                <button type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol</button>
-                {% endif %}
-            </div>
+        <div class="center border-right" style="margin-top: 30px;">
+            <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
+            {% if empty_or_full_value %}
+            <button type="button" class="btn btn-success btn-lg"
+                    style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij
+            </button>
+            {% else %}
+            <button type="button" class="btn btn-danger btn-lg"
+                    style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol
+            </button>
+            {% endif %}
+        </div>
     </div>
     <div class="col-6 text-center">
         <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
-                <h3><strong>Plaatsen beschikbaar</strong></h3>
+            <h3><strong>Plaatsen beschikbaar</strong></h3>
             <p style="font-size:200%"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
@@ -32,49 +34,59 @@
 
 <hr>
 <!--Grafiek-->
-
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Tijd', 'Aantal plekken beschikbaar'],
-          ['08:00',  0],
-          ['09:00',  3],
-          ['10:00',  3],
-          ['11:00',  3],
-          ['12:00',  3],
-          ['13:00',  2],
-          ['14:00',  3],
-          ['15:00',  3],
-          ['16:00',  2],
-          ['17:00',  3],
-          ['18:00',  0],
-        ]);
-
-      var options = {
-        width: 1000,
-        height: 300,
-      };
-
-      var chart = new google.charts.Line(document.getElementById('ParkeerGrafiek'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
-  </script>
-  <br>
-<center>
 <p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
-  <div id="ParkeerGrafiek"></div>
-</center>
+<div id="ParkeerGrafiek">
+    <div class="chart-container" style="position: relative; height:10vh; width:50vw">
+        <canvas id="myChart"></canvas>
+        <script src="{% static 'node_modules/chart.js/dist/Chart.js' %}"></script>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [{ % for graph in graphQuery %
+                }'{{graph.created_at}}',
+            {%
+                endfor %
+            }
+            ],
+            datasets: [{
+                label: 'Parking availability',
+                data: [{ % for graph in graphQuery %
+            }{{graph.availability}
+            },
+            {%
+                endfor %
+            }
+            ],
 
-
-
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+                borderColor
+            :
+            [
+                'rgba(255, 99, 132, 1)',
+            ],
+                borderWidth
+            :
+            1
+            }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+            })
+            ;
+        </script>
+    </div>
+</div>
 </head>
-
-
 
 {% endblock %}

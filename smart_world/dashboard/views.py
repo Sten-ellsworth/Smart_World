@@ -14,14 +14,16 @@ def index(request):
     sensor = Sensors.objects.all()
     # this value gets all of empty values out off the database
     empty_or_full_value = Sensors.objects.filter(sensorValue=1)
-    return render(request, "index.html", {'sensor': sensor, 'empty_or_full_value': empty_or_full_value})
+    # graph query with date
+    graphQuery = Graph.objects.filter(created_at__contains=('2019-11-28'))
 
+    data = {
+        'sensor': sensor,
+        'empty_or_full_value': empty_or_full_value,
+        'graphQuery': graphQuery
+    }
 
-def example(request):
-    sensor = Sensors.objects.all()
-    sensordata = SensorData.objects.filter(created_at__contains=('2019-11-25'))
-
-    return render(request, "chart.html", {'sensor': sensor, 'sensordata': sensordata})
+    return render(request, "index.html", data)
 
 
 @api_view(['GET'])
