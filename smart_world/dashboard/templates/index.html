@@ -1,16 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load staticfiles %}
-<!-- #1 row -->
-<!-- 
-Inhoud:
-- Logo & gele menu
-- Lege kolom
-- Hoeveel plekken zijn er?
-- Is er nog plek?
-- lege kolom
- -->
-   
+
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="row">
 
@@ -25,9 +16,9 @@ Inhoud:
             <div class="center border-right" style="margin-top: 30px;">
                 <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
                 {% if empty_or_full_value %}
-                <button type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij</button>
+                <button id=vrij type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij</button>
                 {% else %}
-                <button type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol</button>
+                <button id=vol type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol</button>
                 {% endif %}
             </div>
     </div>
@@ -38,7 +29,7 @@ Inhoud:
                 {{data.sensorValue}}
                 {%endfor%}
                 <p style="font-size:200%"> {{graphQuery}}</p>
-            <p style="font-size:200%"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
+            <p style="font-size:200%" id="sensorValues">{{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
 </div>
@@ -98,4 +89,47 @@ Inhoud:
 }
   </script>
 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+</script>
+<script>
+    //check of javascript is ready to start
+    $(document).ready(function() {
+        setInterval(() => { // set interval each second
+            $.get("/sensor", (sensors) => { //get api /sensor
+                let count = 0; // empty_or_full_value.count
+                for(let index in sensors) { //loop
+                    if(sensors[index].sensorValue === 1) count++; //is sensorValue = 1 ++
+                }
+                let output = `${count}/${sensors.length}`; //html format
+                $("#sensorValues").html(output); //write html
+            });
+        }, 1000);
+    });
+</script>
+<script>
+    $(document).on('click', '[data-toggle=toggle]', function() {
+      var input = $(this).find('input')[0];
+      switch (input.id) {
+        case 'toggle-email':
+          $('#toggle-phone').bootstrapToggle(!input.checked ? 'on' : 'off');
+          $('#toggle-both').bootstrapToggle('off');
+          break;
+        case 'toggle-phone':
+          $('#toggle-email').bootstrapToggle(!input.checked ? 'on' : 'off');
+          $('#toggle-both').bootstrapToggle('off');
+          break;
+        case 'toggle-both':
+          $('#toggle-email').bootstrapToggle('on');
+          $('#toggle-phone').bootstrapToggle(input.checked ? 'on' : 'off');
+          break;
+      }
+    });
+</script>
 {% endblock %}

@@ -15,7 +15,10 @@ class SensorsSerializer(serializers.ModelSerializer):
         model = Sensors
         fields = '__all__'
 
+<<<<<<< Updated upstream
 class GraphSerializer(serializers.ModelSerializer):
     class Meta:
         model = Graph
         fields = '__all__'
+=======
+>>>>>>> Stashed changes
