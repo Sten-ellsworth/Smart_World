@@ -31,8 +31,7 @@ urlpatterns = [
     path('sensor/', views.sensorList),
     path('sensor/<int:sensor_id>/', views.sensorDetail),
     path('sensor/put/<int:sensor_id>/', views.sensorDetail),
-    path('sensor/post/', views.sensorPost)
-
+    path('sensor/post/', views.sensorPost),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
