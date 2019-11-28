@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import SensorData
 from .models import Sensors
+from .models import Graph
 
 
 class SensorDataSerializer(serializers.ModelSerializer):
@@ -12,4 +13,9 @@ class SensorDataSerializer(serializers.ModelSerializer):
 class SensorsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensors
+        fields = '__all__'
+
+class GraphSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Graph
         fields = '__all__'

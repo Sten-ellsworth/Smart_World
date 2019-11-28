@@ -31,50 +31,59 @@
 
 <hr>
 <!--Grafiek-->
+<p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
+<div id="ParkeerGrafiek">
+    <div class="chart-container" style="position: relative; height:10vh; width:50vw">
+        <canvas id="myChart"></canvas>
+        <script src="{% static 'node_modules/chart.js/dist/Chart.js' %}"></script>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [{ % for graph in graphQuery %
+                }'{{graph.created_at}}',
+            {%
+                endfor %
+            }
+            ],
+            datasets: [{
+                label: 'Parking availability',
+                data: [{ % for graph in graphQuery %
+            }{{graph.availability}
+            },
+            {%
+                endfor %
+            }
+            ],
 
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['line']});
-      google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Tijd', 'Aantal plekken beschikbaar'],
-          ['08:00',  0],
-          ['09:00',  3],
-          ['10:00',  3],
-          ['11:00',  3],
-          ['12:00',  3],
-          ['13:00',  2],
-          ['14:00',  3],
-          ['15:00',  3],
-          ['16:00',  2],
-          ['17:00',  3],
-          ['18:00',  0],
-        ]);
-
-      var options = {
-        width: 1000,
-        height: 300,
-        colors: ['#e6e600', '#e6e600', '#e6e600', '#e6e600', '#e6e600']
-      };
-
-      var chart = new google.charts.Line(document.getElementById('ParkeerGrafiek'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
-  </script>
-  <br>
-<center>
-<p style="font-size:30px; font-family:Roboto;"><b>Parkeerplaats grafiek</b></p>
-  <div id="ParkeerGrafiek"></div>
-</center>
-
-
-
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+                borderColor
+            :
+            [
+                'rgba(255, 99, 132, 1)',
+            ],
+                borderWidth
+            :
+            1
+            }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+            })
+            ;
+        </script>
+    </div>
+</div>
 </head>
-
-
 
 {% endblock %}

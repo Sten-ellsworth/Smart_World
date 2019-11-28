@@ -3,8 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import SensorData, Sensors
-from .serializer import SensorDataSerializer, SensorsSerializer
+from .models import SensorData, Sensors, Graph
+from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
 from django.shortcuts import render
 
 
@@ -14,14 +14,33 @@ def index(request):
     sensor = Sensors.objects.all()
     # this value gets all of empty values out off the database
     empty_or_full_value = Sensors.objects.filter(sensorValue=1)
-    return render(request, "index.html", {'sensor': sensor, 'empty_or_full_value': empty_or_full_value})
+    # graph query with date
+    graphQuery = Graph.objects.filter(created_at__contains=('2019-11-28'))
+
+    data = {
+        'sensor': sensor,
+        'empty_or_full_value': empty_or_full_value,
+        'graphQuery': graphQuery
+    }
+
+    return render(request, "index.html", data)
 
 
-def example(request):
-    sensor = Sensors.objects.all()
-    return render(request, "example.html", {'sensor': sensor})
+@api_view(['GET'])
+def getGraph(request):
+    graph = Graph.objects.all()
+    serializer = GraphSerializer(graph, many=True)
+    return Response(serializer.data)
 
 
+@api_view(['POST'])
+def postGraph(request):
+    if request.method == 'POST':
+        serializer = GraphSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def getList(request):
@@ -58,6 +77,11 @@ def postList(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+def sensorList(request):
+    sensor = Sensors.objects.all()
+    serializer = SensorsSerializer(sensor, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def sensorList(request):

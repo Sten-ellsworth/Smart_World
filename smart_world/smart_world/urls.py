@@ -31,7 +31,10 @@ urlpatterns = [
     path('sensor/', views.sensorList),
     path('sensor/<int:sensor_id>/', views.sensorDetail),
     path('sensor/put/<int:sensor_id>/', views.sensorDetail),
-    path('sensor/post/', views.sensorPost)
+    path('sensor/post/', views.sensorPost),
+    # graph
+    path('graph/', views.getGraph),
+    path('graph/post/', views.postGraph),
 
 ]
 
