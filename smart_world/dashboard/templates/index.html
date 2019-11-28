@@ -41,21 +41,10 @@
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [{ % for graph in graphQuery %
-                }'{{graph.created_at}}',
-            {%
-                endfor %
-            }
-            ],
+                    labels: [{% for graph in graphQuery %}'{{graph.created_at}}',{%endfor %}],
             datasets: [{
                 label: 'Parking availability',
-                data: [{ % for graph in graphQuery %
-            }{{graph.availability}
-            },
-            {%
-                endfor %
-            }
-            ],
+                data: [{% for graph in graphQuery %}{{graph.availability}},{%endfor %}],
 
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
