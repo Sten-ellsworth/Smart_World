@@ -10,7 +10,7 @@ class SensorData(models.Model):
     sensor_ID = models.IntegerField()
     sensorValue = models.IntegerField()
     created_at = models.DateTimeField(auto_now=True)
-
+ 
 
     def save(self, *args, **kwargs):
         if self.created_at == None:
