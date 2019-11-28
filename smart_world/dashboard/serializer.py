@@ -12,5 +12,3 @@ class SensorsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensors
         fields = '__all__'
-
-

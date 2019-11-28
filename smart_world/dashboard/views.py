@@ -1,15 +1,9 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
-from rest_framework import status, generics
-from .models import SensorData, Sensors
-from .serializer import SensorDataSerializer, SensorsSerializer
 from django.shortcuts import render
-from django.http import JsonResponse
 
 
 def index(request): #path('', include(dashboard.urls)

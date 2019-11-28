@@ -2,32 +2,69 @@
 {% block content %}
 {% load staticfiles %}
 
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div class="row">
+ <script type="text/javascript"
+         src="https://www.gstatic.com/charts/loader.js">
+ </script>
 
-    <div class="col" style="background-color:#4f4f4f;">
+<div class="row">
+    <div class="col"
+         style="background-color:#4f4f4f;"
+    >
         <center>
-            <img src= "{% static 'images/wf.png' %}" alt="Text to display if image is not found">
+            <img src= "{% static 'images/wf.png' %}"
+                 alt="Text to display if image is not found">
         </center>
     </div>
 </div>
+
 <div class="row">
     <div class="col-6 text-center">
-            <div class="center border-right" style="margin-top: 30px;">
-                <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
-
-                <button id="vrij" type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if not empty_or_full_value %} display: none; {% endif %}">Vrij</button>
-                <button id="vol" type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if empty_or_full_value %} display: none; {% endif %}">Vol</button>
+            <div class="center border-right"
+                 style="margin-top: 30px;">
+                <h3>
+                    <strong>Parkeergarage Windesheim Flevoland</strong>
+                </h3>
+                <button id="vrij"
+                        type="button"
+                        class="btn btn-success btn-lg"
+                        style="padding: 10px 20px;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        width:120px;
+                        {% if not empty_or_full_value %} display: none;
+                        {% endif %}"
+                >Vrij</button>
+                <button id="vol"
+                        type="button"
+                        class="btn btn-danger btn-lg"
+                        style="padding: 10px 20px;
+                        font-size: 20px;
+                        border-radius: 10px;
+                        width:120px;
+                        {% if empty_or_full_value %}
+                        display: none;
+                        {% endif %}"
+                >Vol</button>
             </div>
     </div>
     <div class="col-6 text-center">
-        <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
-                <h3><strong>Plaatsen beschikbaar</strong></h3>
+        <div class="bezet"
+             style="margin-top: 30px;
+             margin-right: 100px;">
+
+                <h3>
+                    <strong>Plaatsen beschikbaar</strong>
+                </h3>
                 {% for data in graphQuery%}
                 {{data.sensorValue}}
                 {%endfor%}
-                <p style="font-size:200%"> {{graphQuery}}</p>
-            <p style="font-size:200%" id="sensorValues">{{empty_or_full_value.count}}/{{sensor.count}}</p>
+                <p style="font-size:200%">
+                    {{graphQuery}}
+                </p>
+            <p style="font-size:200%"
+               id="sensorValues">
+                {{empty_or_full_value.count}}/{{sensor.count}}
+            </p>
         </div>
     </div>
 </div>
@@ -38,15 +75,13 @@
 
   <br>
 <center>
-<p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
-  <div id="ParkeerGrafiek"></div>
+    <p style="font-size:30px;">
+        <b>Parkeerplaats grafiek</b>
+    </p>
+      <div id="ParkeerGrafiek"></div>
 </center>
 
-
-
 </head>
-
-
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
