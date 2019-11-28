@@ -1,30 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load staticfiles %}
-
+<!-- <img src= "{% static 'images/background_picture.png' %}"> -->
 <div class="row">
-
-    <div class="col" style="background-color:#4f4f4f;">
+    <div class="col" style="background-image:url('{% static 'images/background_picture.png' %}');">
         <center>
-            <img src= "{% static 'images/wf.png' %}" alt="Text to display if image is not found">
+            <img src= "{% static 'images/Windesheim_logo.png' %}" height="150" width="250" alt="Text to display if image is not found">
         </center>
     </div>
 </div>
 <div class="row">
     <div class="col-6 text-center">
             <div class="center border-right" style="margin-top: 30px;">
-                <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
+                <h3 style="font-family:Roboto;"><strong>Parkeergarage Windesheim Flevoland</strong></h3>
                 {% if empty_or_full_value %}
-                <button type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vrij</button>
+                <button style="font-family:Roboto;" type="button" class="btn btn-success" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">Vrij</button>
                 {% else %}
-                <button type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;">Vol</button>
+                <button type="button" class="btn btn-danger" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; font-family:Roboto;">Vol</button>
                 {% endif %}
             </div>
     </div>
     <div class="col-6 text-center">
         <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
-                <h3><strong>Plaatsen beschikbaar</strong></h3>
-            <p style="font-size:200%"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
+                <h3 style="font-family:Roboto;"></h3style><strong>Plaatsen beschikbaar</strong></h3>
+            <p style="font-size:200%; font-family:Roboto;"> {{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
 </div>
@@ -58,6 +57,7 @@
       var options = {
         width: 1000,
         height: 300,
+        colors: ['#e6e600', '#e6e600', '#e6e600', '#e6e600', '#e6e600']
       };
 
       var chart = new google.charts.Line(document.getElementById('ParkeerGrafiek'));
@@ -67,7 +67,7 @@
   </script>
   <br>
 <center>
-<p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
+<p style="font-size:30px; font-family:Roboto;"><b>Parkeerplaats grafiek</b></p>
   <div id="ParkeerGrafiek"></div>
 </center>
 
