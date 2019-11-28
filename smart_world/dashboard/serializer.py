@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from .models import SensorData
 from .models import Sensors
-from .models import Graph
-
 
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,10 +13,4 @@ class SensorsSerializer(serializers.ModelSerializer):
         model = Sensors
         fields = '__all__'
 
-<<<<<<< Updated upstream
-class GraphSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Graph
-        fields = '__all__'
-=======
->>>>>>> Stashed changes
+

@@ -2,15 +2,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-<<<<<<< Updated upstream
 from rest_framework import status
-from .models import SensorData, Sensors, Graph
-from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
-=======
+from .models import SensorData, Sensors
+from .serializer import SensorDataSerializer, SensorsSerializer
 from rest_framework import status, generics
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
->>>>>>> Stashed changes
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -20,39 +17,7 @@ def index(request): #path('', include(dashboard.urls)
     empty_or_full_value = Sensors.objects.filter(sensorValue=1) # this value gets all of empty values out off the database
     return render(request, "index.html", {'sensor': sensor, 'empty_or_full_value': empty_or_full_value}) #return the request of index.html
 
-def example(request):
-<<<<<<< HEAD
-    sensor = Sensors.objects.all()
-    sensordata = SensorData.objects.filter(created_at__contains=('2019-11-25'))
-=======
-    sensor = Sensors.objects.all() # this value gets all of the data out off the database
-    return render(request, "example.html", {'sensor': sensor}) #return the request of index.html
->>>>>>> ae1292e726cf57f568026df357e51c4a90491080
 
-    return render(request, "chart.html", {'sensor': sensor, 'sensordata': sensordata})
-
-
-<<<<<<< HEAD
-@api_view(['GET'])
-def getGraph(request):
-    graph = Graph.objects.all()
-    serializer = GraphSerializer(graph, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def postGraph(request):
-    if request.method == 'POST':
-        serializer = GraphSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-=======
-@api_view(['GET']) #GET the data from the database with "path('sensor_data/', view.getList
->>>>>>> ae1292e726cf57f568026df357e51c4a90491080
 def getList(request):
     sensor_data = SensorData.objects.all() # this value gets all of the data out off the database
     serializer = SensorDataSerializer(sensor_data, many=True) #serialize the data to JSON format for the API
@@ -86,16 +51,12 @@ def postList(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< Updated upstream
-
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
 
-=======
->>>>>>> Stashed changes
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
