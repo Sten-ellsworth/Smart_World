@@ -30,8 +30,6 @@ class Graph(models.Model):
             self.created_at = datetime.now()
             super(Graph, self).save(*args, **kwargs)
 
-
-
 class Sensors(models.Model):
     sensor_ID = models.IntegerField()
     sensorValue = models.IntegerField()
