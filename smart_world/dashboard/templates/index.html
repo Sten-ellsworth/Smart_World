@@ -26,20 +26,24 @@
     </div>
 </div>
 </div>
-
 <hr>
 <!--Grafiek-->
+ <p style="font-size:30px;" align="center"><b>Windesheim Flevoland parkeergarage</b></p>
 <div class="row">
-    <div class="col-6">
-        <div align="center">
-            <form method="get" action="/">
-                <input type="text" name="date">
-                <input type="submit">
-            </form>
-        </div>
-    </div>
         <div class="col-6">
-            <p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
+            <div align="center">
+                            <p style="font-size:30px;" align="center"><b>De verwachte tijd dat parkeergarage vol is: {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
+            </div>
+        </div>
+            <div class="col-6" align="left">
+                <form method="get" action="/">
+                    <p style="font-size:20px;" align="left"><b>Specifieke dag bekijken</b></p>
+                    <input type="date" name="date" data-date-inline-picker="true">
+                    <button class="btn btn-primary btn-warning" type="submit">Submit</button>
+                </form>
+            </div>
+</div>
+        <div align="center">
             <div id="ParkeerGrafiek">
                 <div class="chart-container" style="position: relative; height:10vh; width:50vw">
                     <canvas id="myChart"></canvas>
@@ -52,8 +56,8 @@
                                 labels: [{% for date in dates %}'{{ date.created_at }}',{%endfor %}
                         ],
                         datasets: [{
-                            label: 'Parking availability',
-                            data: [{% for date in dates %}{{date.availability}},{%endfor %}
+                            label: 'Bezette parkeergarage per dag',
+                            data: [3, {% for date in dates %}'{{date.availability}}',{%endfor %}
                         ],
 
                         backgroundColor: [

@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from datetime import datetime
+from datetime import datetime, timedelta
 from .models import SensorData, Sensors, Graph
 from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer, ChartFilter
 from django.shortcuts import render
@@ -16,40 +16,34 @@ def index(request):
     # this value gets all of empty values out off the database
     empty_or_full_value = Sensors.objects.filter(sensorValue=1)
     # graph query with date
-
     if not request.GET:
         curr_datetime = datetime.now()
         curr_date = curr_datetime.date()
+        time_diff = timedelta(days=-1)
+        req_date_time = curr_date + time_diff
 
-        date = Graph.objects.filter(created_at__date=curr_date)
+        date = Graph.objects.filter(created_at__date=req_date_time)
 
 
     else:
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
 
+    #prognose
+    curr_datetime = datetime.now()
+    curr_date = curr_datetime.date()
+    time_diff = timedelta(days=-4)
+    prog_1_week = curr_date + time_diff
+    prognose = Graph.objects.filter(created_at__date=prog_1_week, availability=0)[:1]
+
     data = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
-        'dates': date
+        'dates': date,
+        'prognose': prognose
     }
 
     return render(request, "index.html", data)
-
-# def search(request):
-#
-#     if not request.GET:
-#         curr_datetime = datetime.now()
-#         curr_date = curr_datetime.date()
-#
-#         date = Graph.objects.filter(created_at__date=curr_date)
-#
-#
-#     else:
-#         input_date = request.GET['date']
-#         date = Graph.objects.filter(created_at__date=input_date)
-#
-#     return render(request, 'index.html', {'dates': date}) # dit in de view
 
 
 @api_view(['GET'])

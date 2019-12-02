@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/smart_world/static/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0002_auto_20191122_0938.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0003_auto_20191125_1450.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0004_graph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smart_world/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +56,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\stene\Documents\parkeergarage\smart_world\static\css" />
+      <recent name="C:\Users\stene\Documents\parkeergarage\smart_world\static" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -75,6 +87,8 @@
       <workItem from="1574329274091" duration="9781000" />
       <workItem from="1574857108295" duration="27094000" />
       <workItem from="1575024939758" duration="3568000" />
+      <workItem from="1575106097690" duration="1068000" />
+      <workItem from="1575111378665" duration="6498000" />
     </task>
     <servers />
   </component>
