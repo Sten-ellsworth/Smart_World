@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from .models import SensorData, Sensors, Graph
 from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
 from django.shortcuts import render
+from django.db.models import Avg
 
 
 
@@ -44,6 +45,37 @@ def index(request):
     }
 
     return render(request, "index.html", data)
+
+    #prognos avg. over 3 weeks
+    curr_datetime = datetime.now()
+    curr_date = curr_datetime.date()
+
+    time_diff1 = timedelta(days=-7)
+    prognose2 = curr_date + time_diff1
+    prognose2_filter = Graph.objects.filter(created_at__date=prognose2, availability=0)[:1]
+
+    time_diff2 = timedelta(days=-14)
+    prognose3 = curr_date + time_diff2
+    prognose3_filter = Graph.objects.filter(created_at__date=prognose3, availability=0)[:1]
+
+    time_diff3 = timedelta(days=-21)
+    prognose4 = curr_date + time_diff3
+    prognose4_filter = Graph.objects.filter(created_at__date=prognose4, availability=0)[:1]
+
+    time_avg = Avg(prognose2_filter, prognose3_filter, prognose4_filter)
+
+
+    data = {
+        'sensor': sensor,
+        'empty_or_full_value': empty_or_full_value,
+        'dates': date,
+        'prognose2_filter': prognose2_filter,
+        'time_avg': time_avg,
+        'prognose4_filter': prognose4_filter
+    }
+
+    return render(request, "index.html", data)
+
 
 
 @api_view(['GET'])

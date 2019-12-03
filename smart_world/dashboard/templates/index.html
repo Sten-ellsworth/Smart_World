@@ -48,6 +48,25 @@ Gedeelte 2:
 -->
 <div class="row">
     <div class="col-6 text-center">
+        <div class="col-6">
+            <div align="center">
+                            <p style="font-size:30px;" align="center"><b>De verwachte tijd dat parkeergarage vol is: {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
+            </div>
+            <div align="center">
+                <h6>De verwachte tijd dat parkeergarage vol is: {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</h6>
+                <h6>De verwachte tijd: {% for prog1 in prognose_1 %} {{prog1.created_at|date:'H:i'}}{% endfor %}</h6>
+                <h6>De verwachte tijd: {% for prog4 in prognose_4 %} {{prog4.created_at|date:'H:i'}}{% endfor %}</h6>
+                <h6>De verwachte tijd: {% for time in time_avg %} {{time.created_at|date:'H:i'}}{% endfor %}</h6>
+        </div>
+            <div class="col-6" align="left">
+                <form method="get" action="/">
+                    <p style="font-size:20px;" align="left"><b>Specifieke dag bekijken</b></p>
+                    <input type="date" name="date" data-date-inline-picker="true">
+                    <button class="btn btn-primary btn-warning" type="submit">Submit</button>
+                </form>
+            </div>
+</div>
+
         <div align="center">
             <div id="ParkeerGrafiek">
                 <div class="chart-container" style="position: relative; height:10vh; width:45vw">
