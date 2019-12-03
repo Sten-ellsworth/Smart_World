@@ -1,6 +1,4 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime, timedelta
@@ -96,32 +94,32 @@ def postGraph(request):
 
 @api_view(['GET'])
 def getList(request):
-    sensor_data = SensorData.objects.all()
-    serializer = SensorDataSerializer(sensor_data, many=True)
-    return Response(serializer.data)
+    sensor_data = SensorData.objects.all() # this value gets all of the data out off the database
+    serializer = SensorDataSerializer(sensor_data, many=True) #serialize the data to JSON format for the API
+    return Response(serializer.data) #return JSON serialized data
 
 
-@api_view(['GET', 'PUT'])
-def detailList(request, pk):
+@api_view(['GET', 'PUT']) #GET and PUT the data from and to the database
+def detailList(request, pk): #retrieve or update a code
     try:
-        sensor_data = SensorData.objects.get(pk=pk)
+        sensor_data = SensorData.objects.get(pk=pk) #get specific pk = primary key
     except SensorData.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        serializer = SensorDataSerializer(sensor_data)
-        return Response(serializer.data)
+    if request.method == 'GET': #retrieve data from the database, path('sensor_data/<int:pk>, views.detailList
+        serializer = SensorDataSerializer(sensor_data) #serialize the data to JSON form for the API
+        return Response(serializer.data) #return JSON serialized data
 
-    elif request.method == 'PUT':
+    elif request.method == 'PUT': #update data from the database, path('sensor_data/put/<int:pk>'
         serializer = SensorDataSerializer(sensor_data, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
+@api_view(['POST']) #create a new object in the database
 def postList(request):
-    if request.method == 'POST':
+    if request.method == 'POST': #create object in database, path('sensor_data/post/', views.postList
         serializer = SensorDataSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -140,7 +138,6 @@ def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
-
 
 @api_view(['GET', 'PUT'])
 def sensorDetail(request, sensor_id):
