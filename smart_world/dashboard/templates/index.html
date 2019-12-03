@@ -4,18 +4,9 @@
 <!-- Inladen van de inhoud van de static folder-->
 {% load staticfiles %}
 
-<<<<<<< HEAD
 <!-- Overal het lettertype "Roboto toepassen"-->
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-=======
- <script type="text/javascript"
-         src="https://www.gstatic.com/charts/loader.js">
- </script>
-
-<!-- Overal het lettertype "Roboto toepassen"-->
-<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 
 <!-- Logo met banner-->
 <div class="row" align="center">
@@ -28,10 +19,8 @@
 - Weergave of de parkeergarage vol of vrij is
 - Weergave hoeveel plekken er beschikbaar zijn
  -->
-
 <div class="row">
     <div class="col-6 text-center">
-<<<<<<< HEAD
             <div class="center border-right" style="margin-top: 30px;">
                 <p style="font-size:20px;">Parkeergarage Windesheim Flevoland</p>
                 <button type="button" class="btn btn-success" align="center"  style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if not empty_or_full_value %} display: none; {% endif %}"><b>Vrij</b></button>
@@ -52,84 +41,6 @@
 
 <hr>
 <!--Grafiek-->
-=======
-        <div class="center border-right" style="margin-top: 30px;">
-                <h3>
-                    <strong>Parkeergarage Windesheim Flevoland</strong>
-                </h3>
-                <button id="vrij"
-                        type="button"
-                        class="btn btn-success btn-lg"
-                        style="padding: 10px 20px;
-                        font-size: 20px;
-                        border-radius: 10px;
-                        width:120px;
-                        {% if not empty_or_full_value %} display: none;
-                        {% endif %}"
-                >Vrij</button>
-                <button id="vol"
-                        type="button"
-                        class="btn btn-danger btn-lg"
-                        style="padding: 10px 20px;
-                        font-size: 20px;
-                        border-radius: 10px;
-                        width:120px;
-                        {% if empty_or_full_value %}
-                        display: none;
-                        {% endif %}"
-                >Vol</button>
-            </div>
-    </div>
-    <div class="col-6 text-center">
-        <div class="bezet"
-             style="margin-top: 30px;
-             margin-right: 100px;">
-
-                <h3>
-                    <strong>Plaatsen beschikbaar</strong>
-                </h3>
-                {% for data in graphQuery%}
-                {{data.sensorValue}}
-                {%endfor%}
-                <p style="font-size:200%">
-                    {{graphQuery}}
-                </p>
-            <p style="font-size:200%"
-               id="sensorValues">
-                {{empty_or_full_value.count}}/{{sensor.count}}
-            </p>
-<hr>
-</head>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous">
-</script>
-<script>
-    //check of javascript is ready to start
-    $(document).ready(function() {
-        setInterval(() => { // set interval each second
-            $.get("/sensor", (sensors) => { //get api /sensor
-                let count = 0; // empty_or_full_value.count
-                for(let index in sensors) { //loop
-                    if(sensors[index].sensorValue === 1) count++; //is sensorValue = 1 ++
-                }
-                let output = `${count}/${sensors.length}`; //html format
-                $("#sensorValues").html(output); //write html
-
-                if(count === 0) {
-                    $("#vrij").hide();
-                    $("#vol").show();
-                } else {
-                    $("#vrij").show();
-                    $("#vol").hide();
-                }
-            });
-        }, 10000);
-    });
-</script>
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 
 <!-- 2de Row met gedeeltes:
 Gedeelte 1:
@@ -166,11 +77,11 @@ Gedeelte 2:
                                 '1'
                                 }]
                             },
-                        options: { 
+                        options: {
                             defaultFontFamily: 'Roboto',
-                            tooltips: { 
+                            tooltips: {
                             legend: {
-                            position: 'bottom',          
+                            position: 'bottom',
                             scales: {
                                 yAxes: [{
                                     ticks: {
@@ -192,7 +103,7 @@ Gedeelte 2:
 
     <div class="col-6 text-center" style="margin-top: 70px;">
         <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
-    
+
     <div style="margin-top: 75px;">
         <form method="get" action="/">
             <p style="font-size:20px;">Specifieke dag zoeken
@@ -202,7 +113,6 @@ Gedeelte 2:
     </div>
     </div>
 </div>
-<<<<<<< HEAD
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -233,6 +143,4 @@ Gedeelte 2:
 </script>
 
 
-=======
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 {% endblock %}
