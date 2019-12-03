@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/smart_world/static/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0002_auto_20191122_0938.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0003_auto_20191125_1450.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/migrations/0004_graph.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
