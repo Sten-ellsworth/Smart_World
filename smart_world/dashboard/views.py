@@ -1,24 +1,20 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime, timedelta
 from .models import SensorData, Sensors, Graph
 from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
+<<<<<<< HEAD
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
 from rest_framework import status, generics
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
+=======
+>>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 from django.shortcuts import render
-from django.http import JsonResponse
 
 
-def index(request): #path('', include(dashboard.urls)
-    sensor = Sensors.objects.all()  # this value gets all of the data out off the database
-    empty_or_full_value = Sensors.objects.filter(sensorValue=1) # this value gets all of empty values out off the database
-    return render(request, "index.html", {'sensor': sensor, 'empty_or_full_value': empty_or_full_value}) #return the request of index.html
 
 def index(request):
     # this value gets all of the data out off the database
@@ -106,6 +102,10 @@ def postList(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
@@ -117,7 +117,6 @@ def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
-
 
 @api_view(['GET', 'PUT'])
 def sensorDetail(request, sensor_id):

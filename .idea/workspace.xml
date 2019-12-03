@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" afterDir="false" />
+=======
+>>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/views.py" afterDir="false" />
@@ -36,9 +39,13 @@
         <option value="Python Script" />
         <option value="HTML File" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <option value="JavaScript File" />
 >>>>>>> origin/Reload_Page
+=======
+        <option value="JavaScript File" />
+>>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
       </list>
     </option>
   </component>
