@@ -80,7 +80,7 @@ Gedeelte 2:
                                 labels: [{% for date in dates %}'{{ date.created_at }}',{%endfor %}
                                 ],
                                 datasets: [{
-                                    label: 'Parkeerplekken bezet',
+                                    label: 'Parkeerplekken vrij',
                                     data: [3, {% for date in dates %}'{{date.availability}}',{%endfor %},                                
                                 ],
                                 backgroundColor: [
