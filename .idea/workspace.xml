@@ -4,7 +4,6 @@
     <list default="true" id="96b9d79e-d594-49a8-9fd0-1da5c0d852bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/dashboard/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart_world/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/smart_world/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
