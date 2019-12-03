@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<!-- Inladen van de inhoud van de static folder-->
 {% load staticfiles %}
 
  <script type="text/javascript"
          src="https://www.gstatic.com/charts/loader.js">
  </script>
 
-<div class="row">
-    <div class="col"
-         style="background-color:#4f4f4f;"
-    >
-        <center>
-            <img src= "{% static 'images/wf.png' %}"
-                 alt="Text to display if image is not found">
-        </center>
+<!-- Overal het lettertype "Roboto toepassen"-->
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+<!-- Logo met banner-->
+<div class="row" align="center">
+    <div class="col" style="background-image:url('{% static 'images/background_picture.png' %}');">
+        <img src= "{% static 'images/wf2.png' %}" align="center" hspace="20"height="150" width="250" alt="Text to display if image is not found">
     </div>
 </div>
 
+<!-- 1ste row met:
+- Weergave of de parkeergarage vol of vrij is
+- Weergave hoeveel plekken er beschikbaar zijn
+ -->
+
 <div class="row">
     <div class="col-6 text-center">
-            <div class="center border-right"
-                 style="margin-top: 30px;">
+        <div class="center border-right" style="margin-top: 30px;">
                 <h3>
                     <strong>Parkeergarage Windesheim Flevoland</strong>
                 </h3>
@@ -65,22 +70,7 @@
                id="sensorValues">
                 {{empty_or_full_value.count}}/{{sensor.count}}
             </p>
-        </div>
-    </div>
-</div>
-</div>
-
 <hr>
-<!--Grafiek-->
-
-  <br>
-<center>
-    <p style="font-size:30px;">
-        <b>Parkeerplaats grafiek</b>
-    </p>
-      <div id="ParkeerGrafiek"></div>
-</center>
-
 </head>
 
 <script
@@ -112,5 +102,75 @@
     });
 </script>
 
+<!-- 2de Row met gedeeltes:
+Gedeelte 1:
+- De grafiek
+Gedeelte 2:
+- De verwachte tijd dat de garage vol is.
+- De zoek functie
+-->
+<div class="row">
+    <div class="col-6 text-center">
+        <div align="center">
+            <div id="ParkeerGrafiek">
+                <div class="chart-container" style="position: relative; height:10vh; width:45vw">
+                    <canvas id="myChart"></canvas>
+                    <script src="{% static 'node_modules/chart.js/dist/Chart.js' %}"></script>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: [{% for date in dates %}'{{ date.created_at }}',{%endfor %}
+                                ],
+                                datasets: [{
+                                    label: 'Parkeerplekken vrij',
+                                    data: [3, {% for date in dates %}'{{date.availability}}',{%endfor %},                                
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 201, 4, 0.4)',
+                                ],
+                                borderColor : [
+                                'rgba(255, 201, 4, 0.4)',
+                                ],
+                                borderWidth :
+                                '1'
+                                }]
+                            },
+                        options: { 
+                            defaultFontFamily: 'Roboto',
+                            tooltips: { 
+                            legend: {
+                            position: 'bottom',          
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        suggestedMin: 50,
+                                        suggestedMax: 100
+                                    }
+                                }]
+                            }
+                            }
+                            }
+                            }
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+    <div class="col-6 text-center" style="margin-top: 70px;">
+        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
+    
+    <div style="margin-top: 75px;">
+        <form method="get" action="/">
+            <p style="font-size:20px;">Specifieke dag zoeken
+            <input type="date" name="date" data-date-inline-picker="true" required></p>
+            <button class="btn btn-warning text-white" type="submit" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; margin-top: 30px;"><b>Zoeken</b></button>
+        </form>
+    </div>
+    </div>
+</div>
 {% endblock %}

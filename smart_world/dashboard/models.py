@@ -15,6 +15,15 @@ class SensorData(models.Model):
             super(SensorData, self).save(*args, **kwargs)
 
 
+class Graph(models.Model):
+    availability = models.IntegerField()
+    created_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.created_at == None:
+            self.created_at = datetime.now()
+            super(Graph, self).save(*args, **kwargs)
+
 class Sensors(models.Model):
     sensor_ID = models.IntegerField()
     sensorValue = models.IntegerField()
