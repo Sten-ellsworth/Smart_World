@@ -4,10 +4,7 @@ import time
 import machine
 from machine import Pin, Timer
 from hcsr04 import HCSR04
-<<<<<<< HEAD
-=======
 from apiconnection import Graph
->>>>>>> origin/Reload_Page
 from apiconnection import ApiConnection
 import time
 import _thread
@@ -19,11 +16,8 @@ sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7)
 def print_distance():
     while True:
         print("sensor1:", sensorconnection1.distance_cm())
-<<<<<<< HEAD
-=======
         
         
->>>>>>> origin/Reload_Page
         sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1)
         sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2)
 
@@ -31,10 +25,6 @@ def print_distance():
         sensorApi1.addSensorValue()
         sensorApi2.addSensorValue()
         
-<<<<<<< HEAD
-        time.sleep(10)
-    
-=======
         time.sleep(1)
 
 
@@ -61,7 +51,6 @@ def graphtoner():
 
 # th = _thread.start_new_thread(graphtoner, ())
 
->>>>>>> origin/Reload_Page
 
 # th = _thread.start_new_thread(print_distance, ())
 

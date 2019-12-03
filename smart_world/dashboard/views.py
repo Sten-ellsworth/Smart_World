@@ -51,13 +51,6 @@ def sensorList(request):
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def sensorList(request):
-    sensor = Sensors.objects.all()
-    serializer = SensorsSerializer(sensor, many=True)
-    return Response(serializer.data)
-
-
 @api_view(['GET', 'PUT'])
 def sensorDetail(request, sensor_id):
     try:
