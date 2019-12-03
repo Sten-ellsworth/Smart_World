@@ -32,7 +32,7 @@ def index(request):
     #prognose
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()
-    time_diff = timedelta(days=-4)
+    time_diff = timedelta(days=-5)
     prog_1_week = curr_date + time_diff
     prognose = Graph.objects.filter(created_at__date=prog_1_week, availability=0)[:1]
 
