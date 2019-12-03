@@ -4,14 +4,13 @@ from rest_framework import status
 from datetime import datetime, timedelta
 from .models import SensorData, Sensors, Graph
 from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
-<<<<<<< HEAD
+
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
 from rest_framework import status, generics
 from .models import SensorData, Sensors
 from .serializer import SensorDataSerializer, SensorsSerializer
-=======
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
+
 from django.shortcuts import render
 
 
@@ -102,10 +101,6 @@ def postList(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
