@@ -3,7 +3,6 @@ from .models import SensorData
 from .models import Sensors
 from .models import Graph
 
-
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData

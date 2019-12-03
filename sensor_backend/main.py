@@ -11,6 +11,9 @@ import _thread
 
 sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7) # ports of expantion board 
 # sensorconnection2 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
+sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7)
+# sensorconnection2 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
+
 
 def print_distance():
     while True:
@@ -24,6 +27,16 @@ def print_distance():
         sensorApi2.addSensorValue()
         
         time.sleep(10)
+        
+        
+        sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1)
+        sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2)
+
+
+        sensorApi1.addSensorValue()
+        sensorApi2.addSensorValue()
+        
+        time.sleep(1)
 
 
 def graphtoner(): 
@@ -45,6 +58,7 @@ def graphtoner():
 
         graph.addParkingAvailable()
         time.sleep(10)
+        time.sleep(1)
 
 
 # th = _thread.start_new_thread(graphtoner, ())
@@ -52,3 +66,7 @@ def graphtoner():
 th = _thread.start_new_thread(print_distance, ())
 
 graphtoner()
+
+# th = _thread.start_new_thread(print_distance, ())
+
+print_distance()
