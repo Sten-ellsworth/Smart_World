@@ -7,7 +7,6 @@
 <!-- Overal het lettertype "Roboto toepassen"-->
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div class="row">
 
 <!-- Logo met banner-->
 <div class="row" align="center">
@@ -24,44 +23,24 @@
     <div class="col-6 text-center">
             <div class="center border-right" style="margin-top: 30px;">
                 <p style="font-size:20px;">Parkeergarage Windesheim Flevoland</p>
-                {% if empty_or_full_value %}
-                <button type="button" class="btn btn-success" align="center"  style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;"><b>Vrij</b></button>
-                {% else %}
-                <button type="button" class="btn btn-danger" align="center"  style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px;"><b>Vol</b></button>
-                {% endif %}
-                <h3><strong>Parkeergarage Windesheim Flevoland</strong></h3>
-
-                <button id="vrij" type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if not empty_or_full_value %} display: none; {% endif %}">Vrij</button>
-                <button id="vol" type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if empty_or_full_value %} display: none; {% endif %}">Vol</button>
+                <button type="button" class="btn btn-success" align="center"  style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if not empty_or_full_value %} display: none; {% endif %}"><b>Vrij</b></button>
+                <button type="button" class="btn btn-danger" align="center"  style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if empty_or_full_value %} display: none; {% endif %}"><b>Vol</b></button>
             </div>
     </div>
     <div class="col-6 text-center">
         <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
             <p style="font-size:20px;">Plaatsen beschikbaar</p>
-            <p style="font-size:27px;"><b> {{empty_or_full_value.count}}/{{sensor.count}}</b></p>
-                <h3><strong>Plaatsen beschikbaar</strong></h3>
                 {% for data in graphQuery%}
                 {{data.sensorValue}}
                 {%endfor%}
                 <p style="font-size:200%"> {{graphQuery}}</p>
-            <p style="font-size:200%" id="sensorValues">{{empty_or_full_value.count}}/{{sensor.count}}</p>
+            <p style="font-size:27px;" id="sensorValues">{{empty_or_full_value.count}}/{{sensor.count}}</p>
         </div>
     </div>
 </div>
 
 <hr>
 <!--Grafiek-->
-
-  <br>
-<center>
-<p style="font-size:30px;"><b>Parkeerplaats grafiek</b></p>
-  <div id="ParkeerGrafiek"></div>
-</center>
-
-
-
-</head>
-
 
 <!-- 2de Row met gedeeltes:
 Gedeelte 1:
@@ -86,7 +65,7 @@ Gedeelte 2:
                                 ],
                                 datasets: [{
                                     label: 'Parkeerplekken vrij',
-                                    data: [3, {% for date in dates %}'{{date.availability}}',{%endfor %},                                
+                                    data: [3, {% for date in dates %}'{{date.availability}}',{%endfor %},
                                 ],
                                 backgroundColor: [
                                     'rgba(255, 201, 4, 0.4)',
@@ -159,7 +138,7 @@ Gedeelte 2:
                     $("#vol").hide();
                 }
             });
-        }, 1000);
+        }, 10000);
     });
 </script>
 
