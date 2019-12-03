@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime, timedelta
 from .models import SensorData, Sensors, Graph
-from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer, ChartFilter
+from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
 from django.shortcuts import render
 
 
