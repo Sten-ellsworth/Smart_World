@@ -4,56 +4,32 @@ import time
 import machine
 from machine import Pin, Timer
 from hcsr04 import HCSR04
-from apiconnection import Graph
+from graph import Graph
 from apiconnection import ApiConnection
 import time
 import _thread
 
-sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7) # ports of expantion board 
-# sensorconnection2 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
-<<<<<<< HEAD
-sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7)
-# sensorconnection2 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
-
-=======
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
+sensorconnection1 = HCSR04(Pin.exp_board.G13, Pin.exp_board.G12) # ports of expantion board 
+sensorconnection2 = HCSR04(Pin.exp_board.G9, Pin.exp_board.G8)
+sensorconnection3 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
 
 def print_distance():
     while True:
         print("sensor1:", sensorconnection1.distance_cm())
-<<<<<<< HEAD
+        print("sensor2:", sensorconnection2.distance_cm())
+        print("sensor3:", sensorconnection3.distance_cm())
 
          
         sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1) # give to values to the class ApiConnection. 
-        sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2) # value 1 is the distance, value 2 is which sensor
+        sensorApi2 = ApiConnection(sensorconnection2.distance_cm(), 2) # value 1 is the distance, value 2 is which sensor
+        sensorApi3 = ApiConnection(sensorconnection3.distance_cm(), 3)
+
 
         sensorApi1.addSensorValue() # loops the value through the function addSensorValue
         sensorApi2.addSensorValue()
+        sensorApi3.addSensorValue()
         
         time.sleep(10)
-=======
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
-        
-        
-        sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1)
-        sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2)
-
-<<<<<<< HEAD
-
-        sensorApi1.addSensorValue()
-        sensorApi2.addSensorValue()
-        
-=======
-         
-        sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1) # give to values to the class ApiConnection. 
-        sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2) # value 1 is the distance, value 2 is which sensor
-
-        sensorApi1.addSensorValue() # loops the value through the function addSensorValue
-        sensorApi2.addSensorValue()
-        
-<<<<<<< HEAD
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
-        time.sleep(1)
 
 
 def graphtoner(): 
@@ -63,64 +39,31 @@ def graphtoner():
         else: 
             value1 = 1 
 
-        if sensorconnection1.distance_cm() < 15: 
+        if sensorconnection2.distance_cm() < 15: 
             value2 = 0
         else: 
             value2 = 1 
 
+        if sensorconnection3.distance_cm() < 15: 
+            value3 = 0
+        else: 
+            value3 = 1 
 
-        values = value1 + value2 
+
+        values = value1 + value2 + value3
         print(values)
         graph = Graph(values)
 
         graph.addParkingAvailable()
-<<<<<<< HEAD
-        time.sleep(10)
-=======
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
-        time.sleep(1)
+        time.sleep(11)
 
 
-# th = _thread.start_new_thread(graphtoner, ())
+_thread.start_new_thread(print_distance, ())
+time.sleep(1)
 
-<<<<<<< HEAD
-th = _thread.start_new_thread(print_distance, ())
-
-graphtoner()
-=======
-=======
-        time.sleep(10)
->>>>>>> graph_functionalities
+_thread.start_new_thread(graphtoner, ())
 
 
-def graphtoner(): 
-    while True: 
-        if sensorconnection1.distance_cm() < 15: 
-            value1 = 0
-        else: 
-            value1 = 1 
-
-        if sensorconnection1.distance_cm() < 15: 
-            value2 = 0
-        else: 
-            value2 = 1 
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550
 
 
-<<<<<<< HEAD
-print_distance()
-=======
-        values = value1 + value2 
-        print(values)
-        graph = Graph(values)
 
-        graph.addParkingAvailable()
-        time.sleep(10)
-
-
-# th = _thread.start_new_thread(graphtoner, ())
-
-th = _thread.start_new_thread(print_distance, ())
-
-graphtoner()
->>>>>>> 6ee800c322ee762e3eb09600479b12febf332550

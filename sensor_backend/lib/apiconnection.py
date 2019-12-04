@@ -5,21 +5,6 @@ import json
 import machine
 
 
-class Graph: 
-
-    def __init__(self, available):
-        
-        self.available = available
-        
-    def addParkingAvailable(self):
-
-        sensor_data = {
-          "availability": self.available
-            }
-        graph = urequests.post('http://172.20.10.2:8080/graph/post/', json=sensor_data)
-        graph.close()
-
-
 class ApiConnection:
   
     def __init__(self, sensor_value, sensor):
