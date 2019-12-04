@@ -28,20 +28,62 @@ def index(request):
         date = Graph.objects.filter(created_at__date=input_date)
 
     #prognose
+    # curr_datetime = datetime.now()
+    # curr_date = curr_datetime.date()
+    # time_diff = timedelta(days=-6)
+    # prog_1_week = curr_date + time_diff
+    # prognose = Graph.objects.filter(created_at__date=prog_1_week, availability=0)[:1]
+    #
+    # data = {
+    #     'sensor': sensor,
+    #     'empty_or_full_value': empty_or_full_value,
+    #     'dates': date,
+    #     'prognose': prognose
+    # }
+    #
+    # return render(request, "index.html", data)
+
+
+    #prognose average
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()
-    time_diff = timedelta(days=-5)
-    prog_1_week = curr_date + time_diff
-    prognose = Graph.objects.filter(created_at__date=prog_1_week, availability=0)[:1]
 
-    data = {
+    time_diff1 = timedelta(days=-6)
+    prog_01_week = curr_date + time_diff1
+    prognose1 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]
+
+    # time_diff2 = timedelta(weeks=-2)
+    # prog_02_week = curr_date + time_diff2
+    # prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1]
+    #
+    # time_diff3 = timedelta(weeks=-3)
+    # prog_03_week = curr_date + time_diff3
+    # prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
+
+    print(type(prognose1))
+    prognose2 = print(15)
+    prognose3 = print(16)
+    #
+    # prog_avg_sum = [prognose1, prognose2, prognose3]
+    # prog_avg_sum1 = sum(prog_avg_sum)
+    #
+    # print(prog_avg_sum1)
+
+
+
+    data1 = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
         'dates': date,
-        'prognose': prognose
+        'prognose1': prognose1,
+        'prognose2': prognose2,
+        'prognose3': prognose3,
+        # 'prog_avg_sum': prog_avg_sum,
+        # 'prog_avg_sum1': prog_avg_sum1
     }
 
-    return render(request, "index.html", data)
+    print(prognose1, 'hi')
+    return render(request, "index.html", data1)
 
 
 @api_view(['GET'])
