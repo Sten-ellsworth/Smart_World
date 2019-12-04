@@ -15,6 +15,10 @@ sensorconnection1 = HCSR04(Pin.exp_board.G8, Pin.exp_board.G7) # ports of expant
 def print_distance():
     while True:
         print("sensor1:", sensorconnection1.distance_cm())
+        
+        
+        sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1)
+        sensorApi2 = ApiConnection(sensorconnection1.distance_cm(), 2)
 
          
         sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1) # give to values to the class ApiConnection. 
@@ -23,7 +27,36 @@ def print_distance():
         sensorApi1.addSensorValue() # loops the value through the function addSensorValue
         sensorApi2.addSensorValue()
         
+<<<<<<< HEAD
+        time.sleep(1)
+
+
+def graphtoner(): 
+    while True: 
+        if sensorconnection1.distance_cm() < 15: 
+            value1 = 0
+        else: 
+            value1 = 1 
+
+        if sensorconnection1.distance_cm() < 15: 
+            value2 = 0
+        else: 
+            value2 = 1 
+
+
+        values = value1 + value2 
+        print(values)
+        graph = Graph(values)
+
+        graph.addParkingAvailable()
+        time.sleep(1)
+
+
+# th = _thread.start_new_thread(graphtoner, ())
+
+=======
         time.sleep(10)
+>>>>>>> graph_functionalities
 
 
 def graphtoner(): 
