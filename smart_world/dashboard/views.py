@@ -1,4 +1,5 @@
 from .models import Graph, SensorData, Sensors
+from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -27,11 +28,54 @@ def index(request):
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
 
+        # prognose average
+    curr_datetime = datetime.now()
+    curr_date = curr_datetime.date()
+
+    time1 = timedelta(days=-12)
+    prog_01_week = curr_date + time1
+    prognose1 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]
+
+
+    time2 = timedelta(days=-6)
+    prog_02_week = curr_date + time2
+    prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1]
+
+    for prog2 in prognose2:
+        time2 = datetime.strftime(prog2.created_at, "%I:%M")
+        print(time2)
+
+    time3 = timedelta(days=-12)
+    prog_03_week = curr_date + time3
+    prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
+
+    for prog3 in prognose3:
+        date_format = "%m/%d/%Y"
+        #     time3 = datetime.strftime(prog3.created_at, "%I:%M")
+        time3 = datetime.strftime(prog3.created_at, "%I:%M")
+        print(time3)
+
+    # all = time3 + 12
+
+    a = datetime.strptime(str(time2), "%I:%M")
+    print(a)
+    b = datetime.strptime(str(time3), "%I:%M")
+    print(b)
+    delta = (a - b)
+    print(delta.days)
+    all = divmod(delta.days * 86400 + delta.seconds, 60)
+    print(all)
+
+    # data_all = Graph.objects.values("created_at").annotate(avg=Avg('created_at'))
+    # print(data_all)
 
     data = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
         'dates': date,
+        # "prognose1": prognose1,
+        # "prognose2": prognose2,
+        # "prognose3": prognose3,
     }
 
     return render(request, "index.html", data)
