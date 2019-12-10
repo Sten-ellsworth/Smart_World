@@ -14,8 +14,6 @@ class SensorData(models.Model):
             self.created_at = datetime.now()
             super(SensorData, self).save(*args, **kwargs)
 
-
-
 class Graph(models.Model):
     availability = models.IntegerField()
     created_at = models.DateTimeField(auto_now=True)

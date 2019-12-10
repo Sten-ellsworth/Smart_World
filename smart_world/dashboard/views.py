@@ -27,41 +27,11 @@ def index(request):
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
 
-    # #prognose
-    # curr_datetime = datetime.now()
-    # curr_date = curr_datetime.date()
-    # time_1_week = timedelta(days=-7)
-    # prog_1_week = curr_date + time_1_week
-    # week1 = Graph.objects.filter(created_at__date=prog_1_week, availability=0)[:1]
-    # for prog1 in week1:
-    #     time1 = datetime.strftime(prog1.created_at, "%I:%M")
-    #
-    # print(time1)
-    #
-    # time_2_week = timedelta(days=-7)
-    # prog_2_week = curr_date + time_2_week
-    # week2 = Graph.objects.filter(created_at__date=prog_2_week, availability=0)[:1]
-    #
-    # for prog2 in week2:
-    #     time2 = datetime.strftime(prog2.created_at, "%I:%M")
-    #
-    # print(time2)
-    #
-    # time_3_week = timedelta(days=-7)
-    # prog_3_week = curr_date + time_3_week
-    # week3 = Graph.objects.filter(created_at__date=prog_3_week, availability=0)[:1]
-    #
-    # for prog3 in week3:
-    #     time3 = datetime.strftime(prog3.created_at, "%I:%M")
-    #
-    # print(time3)
-
 
     data = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
         'dates': date,
-        # 'prognose': prognose
     }
 
     return render(request, "index.html", data)
