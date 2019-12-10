@@ -1,3 +1,5 @@
+from django.db.models import Avg
+
 from .models import Graph, SensorData, Sensors
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -5,7 +7,6 @@ from rest_framework import status
 from datetime import datetime, timedelta
 from .serializer import GraphSerializer, SensorDataSerializer, SensorsSerializer
 from django.shortcuts import render
-
 
 
 def index(request):
@@ -27,7 +28,7 @@ def index(request):
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
 
-    #prognose
+    # prognose
     # curr_datetime = datetime.now()
     # curr_date = curr_datetime.date()
     # time_diff = timedelta(days=-6)
@@ -43,33 +44,50 @@ def index(request):
     #
     # return render(request, "index.html", data)
 
-
-    #prognose average
+    # prognose average
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()
 
-    time_diff1 = timedelta(days=-6)
+    time_diff1 = timedelta(days=-12)
     prog_01_week = curr_date + time_diff1
     prognose1 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]
 
-    # time_diff2 = timedelta(weeks=-2)
-    # prog_02_week = curr_date + time_diff2
-    # prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1]
-    #
-    # time_diff3 = timedelta(weeks=-3)
-    # prog_03_week = curr_date + time_diff3
-    # prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
+    for prog in prognose1:
+        time1 = datetime.strftime(prog.created_at, "%R")
 
-    print(type(prognose1))
-    prognose2 = print(15)
-    prognose3 = print(16)
-    #
+    # delta1 = time1
+
+    time_diff2 = timedelta(days=-12)
+    prog_02_week = curr_date + time_diff2
+    prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1]
+
+    for prog2 in prognose2:
+        time2 = datetime.strftime(prog2.created_at, "%R")
+
+    # delta2 = time2
+
+    time_diff3 = timedelta(days=-12)
+    prog_03_week = curr_date + time_diff3
+    prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
+
+    for prog3 in prognose3:
+        time3 = datetime.strftime(prog3.created_at, "%HR")
+
+    print(type(time3))
+    # delta3 = time3
+
+    # t1 = int(delta1) + int(delta2) + int(delta3)
+    # print(type(time1))
+    # f = t1 / 3
+
+    # print(int(time1), int(time2), int(time3))
+
     # prog_avg_sum = [prognose1, prognose2, prognose3]
     # prog_avg_sum1 = sum(prog_avg_sum)
     #
     # print(prog_avg_sum1)
 
-
+    # prog_avg = Graph.objects.all().aggregate(Avg('created_at'))
 
     data1 = {
         'sensor': sensor,
@@ -78,11 +96,12 @@ def index(request):
         'prognose1': prognose1,
         'prognose2': prognose2,
         'prognose3': prognose3,
+        # 'prog_avg': prog_avg
         # 'prog_avg_sum': prog_avg_sum,
         # 'prog_avg_sum1': prog_avg_sum1
     }
 
-    print(prognose1, 'hi')
+    # print(prognose1, 'hi')
     return render(request, "index.html", data1)
 
 
@@ -102,51 +121,56 @@ def postGraph(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def getList(request):
-    sensor_data = SensorData.objects.all() # this value gets all of the data out off the database
-    serializer = SensorDataSerializer(sensor_data, many=True) #serialize the data to JSON format for the API
-    return Response(serializer.data) #return JSON serialized data
+    sensor_data = SensorData.objects.all()  # this value gets all of the data out off the database
+    serializer = SensorDataSerializer(sensor_data, many=True)  # serialize the data to JSON format for the API
+    return Response(serializer.data)  # return JSON serialized data
 
 
-@api_view(['GET', 'PUT']) #GET and PUT the data from and to the database
-def detailList(request, pk): #retrieve or update a code
+@api_view(['GET', 'PUT'])  # GET and PUT the data from and to the database
+def detailList(request, pk):  # retrieve or update a code
     try:
-        sensor_data = SensorData.objects.get(pk=pk) #get specific pk = primary key
+        sensor_data = SensorData.objects.get(pk=pk)  # get specific pk = primary key
     except SensorData.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET': #retrieve data from the database, path('sensor_data/<int:pk>, views.detailList
-        serializer = SensorDataSerializer(sensor_data) #serialize the data to JSON form for the API
-        return Response(serializer.data) #return JSON serialized data
+    if request.method == 'GET':  # retrieve data from the database, path('sensor_data/<int:pk>, views.detailList
+        serializer = SensorDataSerializer(sensor_data)  # serialize the data to JSON form for the API
+        return Response(serializer.data)  # return JSON serialized data
 
-    elif request.method == 'PUT': #update data from the database, path('sensor_data/put/<int:pk>'
+    elif request.method == 'PUT':  # update data from the database, path('sensor_data/put/<int:pk>'
         serializer = SensorDataSerializer(sensor_data, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST']) #create a new object in the database
+
+@api_view(['POST'])  # create a new object in the database
 def postList(request):
-    if request.method == 'POST': #create object in database, path('sensor_data/post/', views.postList
+    if request.method == 'POST':  # create object in database, path('sensor_data/post/', views.postList
         serializer = SensorDataSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
-def sensorList(request):
-    sensor = Sensors.objects.all()
-    serializer = SensorsSerializer(sensor, many=True)
-    return Response(serializer.data)
 
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def sensorList(request):
+    sensor = Sensors.objects.all()
+    serializer = SensorsSerializer(sensor, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['GET', 'PUT'])
 def sensorDetail(request, sensor_id):

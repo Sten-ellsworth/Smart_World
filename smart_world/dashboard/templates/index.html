@@ -106,7 +106,7 @@ Gedeelte 2:
         <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog1 in prognose1 %} {{prog1.created_at|date:'H:i' }}{% endfor %}</h6>
         <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog2 in prognose2 %} {{prog2.created_at|date:'H:i' }}{% endfor %}</h6>
         <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog3 in prognose3 %} {{prog3.created_at|date:'H:i' }}{% endfor %}</h6>
-        <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog4 in prog_avg_sum %} {{prog4.created_at|date:'H:i' }}{% endfor %}</h6>
+        <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog4 in prog_avg %} {{prog4.created_at|date:'H:i' }}{% endfor %}</h6>
         <h6>De verwachte tijd dat parkeergarage vol is:<b> {% for prog5 in prog_avg_sum1 %} {{prog5.created_at|date:'H:i' }}{% endfor %}</h6>
 
     <div style="margin-top: 75px;">
