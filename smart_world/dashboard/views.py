@@ -1,16 +1,9 @@
+from .models import Graph, SensorData, Sensors
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime, timedelta
-from .models import SensorData, Sensors, Graph
-from .serializer import SensorDataSerializer, SensorsSerializer, GraphSerializer
-
-from .models import SensorData, Sensors
-from .serializer import SensorDataSerializer, SensorsSerializer
-from rest_framework import status, generics
-from .models import SensorData, Sensors
-from .serializer import SensorDataSerializer, SensorsSerializer
-
+from .serializer import GraphSerializer, SensorDataSerializer, SensorsSerializer
 from django.shortcuts import render
 
 

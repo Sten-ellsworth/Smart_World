@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import SensorData
-from .models import Sensors
-from .models import Graph
+from .models import SensorData, Sensors, Graph
 
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
