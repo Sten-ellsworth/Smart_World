@@ -38,8 +38,13 @@
     </div>
 </div>
 
+<!-- hr -->
 <hr>
 
+<!-- 2ste row met:
+- De grafiek
+- De zoekoptie
+ -->
 <div class="row">
     <div class="col-6 text-center">
         <div align="center">
@@ -57,43 +62,48 @@
 
                         var data = {
                             labels: [{% for date in dates %}'{{ date.created_at }}',{%endfor %}],
-                            datasets: [
-                                {
+                            datasets: [{  
+                                    label: 'Parkeerplekken vrij',
                                     fill: true,
                                     backgroundColor: [
-                                        'green',
-                                        'red'],
+                                    'rgba(255, 200, 5, 0.4)'],
                                     data: [{% for date in dates %}'{{date.availability}}',{%endfor %}],
-// Notice the borderColor
-                                    borderColor: ['black', 'black'],
                                     borderWidth: [2, 2]
-                                }
-                            ]
+                            }]
                         };
 
-                        // Notice the rotation from the documentation.
-
-                        var options = {
-                            title: {
-                                display: true,
-                                text: 'how many non authorised people trying to get in?',
-                                position: 'top'
-                            },
-                            rotation: -0.7 * Math.PI
-                        };
-
-
-                        // Chart declaration:
                         var myBarChart = new Chart(ctx, {
                             type: 'line',
                             data: data,
-                            options: options
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            callback: function(value) {if (value % 1 === 0) {return value;}}
+                                        }
+                                    }]
+                                }
+                            }
                         });
                     </script>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="col-6 text-center" style="margin-top: 70px;">
+        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
+
+    <div style="margin-top: 75px;">
+        <form method="get" action="/">
+            <p style="font-size:20px;">Specifieke dag zoeken
+            <input type="date" name="date" data-date-inline-picker="true" required></p>
+            <button class="btn btn-warning text-white" type="submit" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; margin-top: 30px;">Zoeken</button>
+        </form>
+    </div>
+    </div>
+</div>
 </div>
 <!--Grafiek-->
 
@@ -104,6 +114,7 @@ Gedeelte 2:
 - De verwachte tijd dat de garage vol is.
 - De zoek functie
 -->
+<!-- 
 <div class="row">
     <div class="col-6 text-center">
         <div align="center">
@@ -154,20 +165,9 @@ Gedeelte 2:
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>  -->
 
-    <div class="col-6 text-center" style="margin-top: 70px;">
-        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
 
-    <div style="margin-top: 75px;">
-        <form method="get" action="/">
-            <p style="font-size:20px;">Specifieke dag zoeken
-            <input type="date" name="date" data-date-inline-picker="true" required></p>
-            <button class="btn btn-warning text-white" type="submit" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; margin-top: 30px;"><b>Zoeken</b></button>
-        </form>
-    </div>
-    </div>
-</div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
