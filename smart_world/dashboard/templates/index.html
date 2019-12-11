@@ -146,7 +146,8 @@
 </div>
 <div class="row">
     <div class="col-6 text-center" style="margin-top: 70px;">
-        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>
+<!--        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {% for prog in prognose1 %} {{prog.created_at|date:'H:i' }}{% endfor %}</b></p>-->
+        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {{time_avg_1|date:'H:i'}}</b></p>
 
     <div style="margin-top: 75px;">
         <form method="get" action="/">
