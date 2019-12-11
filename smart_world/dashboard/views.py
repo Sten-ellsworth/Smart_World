@@ -45,6 +45,8 @@ def index(request):
     # return render(request, "index.html", data)
 
     # prognose average
+
+    #prognose average
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()
 
@@ -71,9 +73,12 @@ def index(request):
     prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
 
     for prog3 in prognose3:
-        time3 = datetime.strftime(prog3.created_at, "%HR")
+        time3 = datetime.strftime(prog3.created_at, "%R")
 
-    print(type(time3))
+    a = time1
+    b= time2
+
+    
     # delta3 = time3
 
     # t1 = int(delta1) + int(delta2) + int(delta3)
