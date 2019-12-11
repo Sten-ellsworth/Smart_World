@@ -32,34 +32,34 @@ def index(request):
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()
 
-    time1 = timedelta(days=-12)
+    time1 = timedelta(days=-13)
     prog_01_week = curr_date + time1
     prognose1 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]
 
 
-    time2 = timedelta(days=-6)
+    time2 = timedelta(days=-7)
     prog_02_week = curr_date + time2
     prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1]
 
     for prog2 in prognose2:
-        time2 = datetime.strftime(prog2.created_at, "%I:%M")
+        time2 = datetime.strftime(prog2.created_at, "%I:%M %p")
         print(time2)
 
-    time3 = timedelta(days=-12)
+    time3 = timedelta(days=-13)
     prog_03_week = curr_date + time3
     prognose3 = Graph.objects.filter(created_at__date=prog_03_week, availability=0)[:1]
 
     for prog3 in prognose3:
         date_format = "%m/%d/%Y"
         #     time3 = datetime.strftime(prog3.created_at, "%I:%M")
-        time3 = datetime.strftime(prog3.created_at, "%I:%M")
+        time3 = datetime.strftime(prog3.created_at, "%I:%M %p")
         print(time3)
 
     # all = time3 + 12
 
-    a = datetime.strptime(str(time2), "%I:%M")
+    a = datetime.strptime(str(time2), "%I:%M %p")
     print(a)
-    b = datetime.strptime(str(time3), "%I:%M")
+    b = datetime.strptime(str(time3), "%I:%M %p")
     print(b)
     delta = (a - b)
     print(delta.days)
