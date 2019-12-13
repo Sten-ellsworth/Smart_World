@@ -9,12 +9,9 @@ from .models import Graph, SensorData, Sensors
 
 
 def index(request):
-    # this value gets all of the data out off the database
-    sensor = Sensors.objects.all()
-    # this value gets all of empty values out off the database
-    empty_or_full_value = Sensors.objects.filter(sensorValue=1)
-    # graph query with date
-    if not request.GET:
+    sensor = Sensors.objects.all()  # this value gets all of the data out off the database
+    empty_or_full_value = Sensors.objects.filter(sensorValue=1) # this value gets all of empty values out off the database
+    if not request.GET: # graph query with date
         curr_datetime = datetime.now()
         curr_date = curr_datetime.date()
         time_diff = timedelta(days=-1)
@@ -28,7 +25,6 @@ def index(request):
         date = Graph.objects.filter(created_at__date=input_date)
 
     # prognose average
-    # curr_datetime = datetime.now() # define current date with time
     curr_date = curr_datetime.date()  # define current date with time
 
 
