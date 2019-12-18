@@ -25,6 +25,7 @@ def index(request):
         date = Graph.objects.filter(created_at__date=input_date)
 
     # prognose average
+    curr_datetime = datetime.now()
     curr_date = curr_datetime.date()  # define current date with time
 
     time1 = timedelta(days=-14)  # time difference of 1 week
