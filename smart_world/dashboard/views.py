@@ -52,7 +52,6 @@ def index(request):
     print(subtract, "43")
 
     time_avg_1 = b + subtract  # get the average by getting the time difference from subtract and add it to time3
-    print(time_avg_1.timestamp(), "correct")
 
     data = {
         'sensor': sensor,
