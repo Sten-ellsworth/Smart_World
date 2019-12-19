@@ -116,7 +116,7 @@
     //check of javascript is ready to start
     $(document).ready(function() {
         setInterval(() => { // set interval each second
-            $.get("/sensor", (sensors) => { //get api /sensor
+            $.get("/sensor/", (sensors) => { //get api /sensor
                 let count = 0; // empty_or_full_value.count
                 for(let index in sensors) { //loop
                     if(sensors[index].sensorValue === 1) count++; //is sensorValue = 1 ++

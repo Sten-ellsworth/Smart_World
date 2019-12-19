@@ -35,7 +35,7 @@ def index(request):
 
     print(time1, "1")
 
-    time2 = timedelta(days=-15)  # time difference of 2 weeks
+    time2 = timedelta(days=-21)  # time difference of 2 weeks
     prog_02_week = curr_date + time2  # prognose with the data from 3 weeks ago
     prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1] # look into the database for availability = 0
 
