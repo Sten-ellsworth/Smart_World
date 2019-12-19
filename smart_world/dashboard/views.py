@@ -10,16 +10,14 @@ from .models import Graph, SensorData, Sensors
 
 def index(request):
     sensor = Sensors.objects.all()  # this value gets all of the data out off the database
-    empty_or_full_value = Sensors.objects.filter(sensorValue=1) # this value gets all of empty values out off the database
-    if not request.GET: # graph query with date
+    empty_or_full_value = Sensors.objects.filter(
+        sensorValue=1)  # this value gets all of empty values out off the database
+    if not request.GET:  # graph query with date
         curr_datetime = datetime.now()
         curr_date = curr_datetime.date()
         time_diff = timedelta(days=-1)
         req_date_time = curr_date + time_diff
-
         date = Graph.objects.filter(created_at__date=req_date_time)
-
-
     else:
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
