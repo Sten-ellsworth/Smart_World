@@ -28,7 +28,7 @@ def index(request):
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()  # define current date with time
 
-    time1 = timedelta(days=-14)  # time difference of 1 week
+    time1 = timedelta(days=-15)  # time difference of 1 week
     prog_01_week = curr_date + time1  # prognose of 2nd week with data from the previous week
     prognose2 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]  # look into the database for availability = 0
 
@@ -37,7 +37,7 @@ def index(request):
 
     print(time1, "1")
 
-    time2 = timedelta(days=-14)  # time difference of 2 weeks
+    time2 = timedelta(days=-21)  # time difference of 2 weeks
     prog_02_week = curr_date + time2  # prognose with the data from 3 weeks ago
     prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1] # look into the database for availability = 0
 
