@@ -18,7 +18,7 @@
 - Weergave of de parkeergarage vol of vrij is
 - Weergave hoeveel plekken er beschikbaar zijn
  -->
-{% for prognose_3 in prognose3 %}'{{prognose_3.created_at|time:"H:i a"}}',{%endfor %}
+<!--{% for prognose_3 in prognose3 %}'{{prognose_3.created_at|time:"H:i a"}}',{%endfor %}-->
 <div class="row">
     <div class="col-6 text-center">
             <div class="center border-right" style="margin-top: 30px;">
@@ -48,6 +48,7 @@
  -->
 <div class="row">
     <div class="col-6 text-center">
+        <p style="font-size:20px;">Historische data van {{date}}</b></p>
         <div align="center">
             <div id="ParkeerGrafiek1">
                 <canvas id="myChart4"></canvas>
@@ -93,7 +94,7 @@
         </div>
     </div>
     <div class="col-6 text-center" style="margin-top: 70px;">
-        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {{time_avg_1|date:'H:i'}}</b></p>
+        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {{time_avg_1}}</b></p>
 
     <div style="margin-top: 75px;">
         <form method="get" action="/">
@@ -132,7 +133,7 @@
                     $("#vol").hide();
                 }
             });
-        }, 10000);
+        }, 1000);
     });
 </script>
 
