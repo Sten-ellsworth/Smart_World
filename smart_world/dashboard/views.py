@@ -15,47 +15,53 @@ def index(request):
     if not request.GET:  # graph query with date
         curr_datetime = datetime.now()
         curr_date = curr_datetime.date()
-        time_diff = timedelta(days=-1)
+        time_diff = timedelta(days=-7)
         req_date_time = curr_date + time_diff
         date = Graph.objects.filter(created_at__date=req_date_time)
+        dates = req_date_time
     else:
         input_date = request.GET['date']
         date = Graph.objects.filter(created_at__date=input_date)
+        dates = input_date
 
     # prognose average
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()  # define current date with time
+    try:
+        time1 = timedelta(days=-35)  # time difference of 1 week
+        prog_01_week = curr_date + time1  # prognose of 2nd week with data from the previous week
+        prognose2 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]  # look into the database for availability = 0
 
-    time1 = timedelta(days=-15)  # time difference of 1 week
-    prog_01_week = curr_date + time1  # prognose of 2nd week with data from the previous week
-    prognose2 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]  # look into the database for availability = 0
+        for prog1 in prognose2:
+            time1 = datetime.strftime(prog1.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
 
-    for prog1 in prognose2:
-        time1 = datetime.strftime(prog1.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
+        print(time1, "1")
 
-    print(time1, "1")
+        time2 = timedelta(days=-41)  # time difference of 2 weeks
+        prog_02_week = curr_date + time2  # prognose with the data from 3 weeks ago
+        prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1] # look into the database for availability = 0
 
-    time2 = timedelta(days=-21)  # time difference of 2 weeks
-    prog_02_week = curr_date + time2  # prognose with the data from 3 weeks ago
-    prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1] # look into the database for availability = 0
+        for prog2 in prognose2:
+            time2 = datetime.strftime(prog2.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
 
-    for prog2 in prognose2:
-        time2 = datetime.strftime(prog2.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
+        print(time2, "3")
 
-    print(time2, "3")
+        a = datetime.strptime(str(time1), "%I:%M %p")  # parse string to time in the same format
+        b = datetime.strptime(str(time2), "%I:%M %p")  # parse string to time in the same format
 
-    a = datetime.strptime(str(time1), "%I:%M %p")  # parse string to time in the same format
-    b = datetime.strptime(str(time2), "%I:%M %p")  # parse string to time in the same format
+        subtract = (a - b) / 2  # substract time2 - time3 and devide it by 2 to get the average in minutes
+        print(subtract, "43")
 
-    subtract = (a - b) / 2  # substract time2 - time3 and devide it by 2 to get the average in minutes
-    print(subtract, "43")
-
-    time_avg_1 = b + subtract  # get the average by getting the time difference from subtract and add it to time3
+        time_avg_1 = b + subtract  # get the average by getting the time difference from subtract and add it to time3
+        time_avg_1 = datetime.strftime(time_avg_1, "%I:%M")
+    except ValueError:
+        time_avg_1 = 'Verwachte tijd kan niet worden vast gesteld.'
 
     data = {
         'sensor': sensor,
         'empty_or_full_value': empty_or_full_value,
         'dates': date,
+        'date': dates,
         'time_avg_1': time_avg_1
     }
 
