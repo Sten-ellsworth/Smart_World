@@ -9,42 +9,45 @@ from apiconnection import ApiConnection
 import time
 import _thread
 
-sensorconnection1 = HCSR04(Pin.exp_board.G13, Pin.exp_board.G12) # ports of expantion board 
-sensorconnection2 = HCSR04(Pin.exp_board.G9, Pin.exp_board.G8)
+sensorconnection1 = HCSR04(Pin.exp_board.G6, Pin.exp_board.G7) # ports of expantion board 
+sensorconnection2 = HCSR04(Pin.exp_board.G12, Pin.exp_board.G11)
 sensorconnection3 = HCSR04(Pin.exp_board.G16, Pin.exp_board.G15)
 
-def print_distance():
+
+def sensors():
     while True:
-        print("sensor1:", sensorconnection1.distance_cm())
-        print("sensor2:", sensorconnection2.distance_cm())
-        print("sensor3:", sensorconnection3.distance_cm())
+        sensor1 = sensorconnection1.distance_cm()
+        sensor2 = sensorconnection2.distance_cm()
+        sensor3 = sensorconnection3.distance_cm()
 
-         
-        sensorApi1 = ApiConnection(sensorconnection1.distance_cm(), 1) # give to values to the class ApiConnection. 
-        sensorApi2 = ApiConnection(sensorconnection2.distance_cm(), 2) # value 1 is the distance, value 2 is which sensor
-        sensorApi3 = ApiConnection(sensorconnection3.distance_cm(), 3)
+        sensorApi1 = ApiConnection(sensor1, 1) # give to values to the class ApiConnection. 
+        sensorApi2 = ApiConnection(sensor2, 2) # value 1 is the distance, value 2 is which sensor
+        sensorApi3 = ApiConnection(sensor3, 3)
 
+        print("sensor1:", sensor1)
+        time.sleep(1)
+        print("sensor2:", sensor2)
+        time.sleep(1)
+        print("sensor3:", sensor3)
 
-        sensorApi1.addSensorValue() # loops the value through the function addSensorValue
+        sensorApi1.addSensorValue()# loops the value through the function addSensorValue
+        time.sleep(1) 
         sensorApi2.addSensorValue()
+        time.sleep(1) 
         sensorApi3.addSensorValue()
-        
-        time.sleep(10)
+        time.sleep(1)
 
-
-def graphtoner(): 
-    while True: 
-        if sensorconnection1.distance_cm() < 15: 
+        if sensor1 < 10: 
             value1 = 0
         else: 
             value1 = 1 
 
-        if sensorconnection2.distance_cm() < 15: 
+        if sensor2 < 10: 
             value2 = 0
         else: 
             value2 = 1 
 
-        if sensorconnection3.distance_cm() < 15: 
+        if sensor3 < 10: 
             value3 = 0
         else: 
             value3 = 1 
@@ -55,13 +58,15 @@ def graphtoner():
         graph = Graph(values)
 
         graph.addParkingAvailable()
-        time.sleep(11)
+        time.sleep(5)
+        
 
 
-_thread.start_new_thread(print_distance, ())
+_thread.start_new_thread(sensors, ())
 time.sleep(1)
 
-_thread.start_new_thread(graphtoner, ())
+# _thread.start_new_thread(graphtoner, ())
+
 
 
 
