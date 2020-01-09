@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 from .serializer import GraphSerializer, SensorDataSerializer, SensorsSerializer
 from .models import Graph, SensorData, Sensors
 
-
 def index(request):
     sensor = Sensors.objects.all()  # this value gets all of the data out off the database
     empty_or_full_value = Sensors.objects.filter(
@@ -28,23 +27,19 @@ def index(request):
     curr_datetime = datetime.now()
     curr_date = curr_datetime.date()  # define current date with time
     try:
-        time1 = timedelta(days=-35)  # time difference of 1 week
+        time1 = timedelta(days=-36)  # time difference of 1 week
         prog_01_week = curr_date + time1  # prognose of 2nd week with data from the previous week
         prognose2 = Graph.objects.filter(created_at__date=prog_01_week, availability=0)[:1]  # look into the database for availability = 0
 
         for prog1 in prognose2:
             time1 = datetime.strftime(prog1.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
 
-        print(time1, "1")
-
-        time2 = timedelta(days=-41)  # time difference of 2 weeks
+        time2 = timedelta(days=-42)  # time difference of 2 weeks
         prog_02_week = curr_date + time2  # prognose with the data from 3 weeks ago
         prognose2 = Graph.objects.filter(created_at__date=prog_02_week, availability=0)[:1] # look into the database for availability = 0
 
         for prog2 in prognose2:
             time2 = datetime.strftime(prog2.created_at, "%I:%M %p") # formatting time with hours and minutes (AM & PM)
-
-        print(time2, "3")
 
         a = datetime.strptime(str(time1), "%I:%M %p")  # parse string to time in the same format
         b = datetime.strptime(str(time2), "%I:%M %p")  # parse string to time in the same format
@@ -120,20 +115,17 @@ def postList(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 def sensorList(request):
     sensor = Sensors.objects.all()
     serializer = SensorsSerializer(sensor, many=True)
     return Response(serializer.data)
-
 
 @api_view(['GET', 'PUT'])
 def sensorDetail(request, sensor_id):
@@ -152,7 +144,6 @@ def sensorDetail(request, sensor_id):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['POST'])
 def sensorPost(request):

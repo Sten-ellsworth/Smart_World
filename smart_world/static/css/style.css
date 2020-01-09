@@ -1,0 +1,60 @@
+button {
+    font-size: 20px;
+    border-radius: 10px;
+    width: 120px;
+    padding: 10px 20px;
+}
+
+.wf2 {
+    align-content: center;
+    padding-top: 20px;
+    height: 150px;
+    width: 250px;
+}
+
+.Plaatsen_beschikbaar {
+    font-size: 20px;
+}
+
+.bezet {
+    margin-top: 30px;
+    margin-right: 100px;
+}
+
+.graphQuery {
+    font-size:20px;
+}
+
+.history {
+    font-size:20px;
+}
+
+.graphAlign {
+    align-content: center;
+}
+
+.chart-container {
+    position: relative;
+    height:10vh;
+    width:45vw
+}
+
+.sensorValues {
+    font-size:27px;
+}
+
+.timeAvg {
+    margin-top: 70px;
+}
+
+.datePicker {
+    margin-top: 75px;
+}
+
+.btn_warning {
+    font-size: 20px;
+    border-radius: 10px;
+    width: auto;
+    padding: 5px 10px;
+    text-align: center;
+}

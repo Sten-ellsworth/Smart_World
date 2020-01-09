@@ -1,59 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- Inladen van de inhoud van de static folder-->
+<!-- Loading context of static folder-->
 {% load staticfiles %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-<!-- Overal het lettertype "Roboto toepassen"-->
-<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- font type "Roboto"-->
+<link href="http://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css">
 
-<!-- Logo met banner-->
+<!-- Logo with banner-->
 <div class="row" align="center">
     <div class="col" style="background-image:url('{% static 'images/background_picture.png' %}');">
-        <img src= "{% static 'images/wf2.png' %}" align="center" hspace="20"height="150" width="250" alt="Text to display if image is not found">
+            <img class="wf2" src= "{% static 'images/wf2.png' %}"
+                 alt="Text to display if image is not found">
     </div>
 </div>
 
-<!-- 1ste row met:
-- Weergave of de parkeergarage vol of vrij is
-- Weergave hoeveel plekken er beschikbaar zijn
- -->
-<!--{% for prognose_3 in prognose3 %}'{{prognose_3.created_at|time:"H:i a"}}',{%endfor %}-->
+<!-- first row with:
+- Displays availability of parking garage
+- Displays amount of available parking spots
+-->
+
 <div class="row">
     <div class="col-6 text-center">
             <div class="center border-right" style="margin-top: 30px;">
                 <p style="font-size:20px;">Parkeergarage Windesheim Flevoland</p>
-                 <button id="vrij" type="button" class="btn btn-success btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if not empty_or_full_value %} display: none; {% endif %}">Vrij</button>
-                 <button id="vol" type="button" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; {% if empty_or_full_value %} display: none; {% endif %}">Vol</button>
+                 <button id="vrij"
+                         type="button"
+                         class="btn btn-success btn-lg"
+                         style=";
+                         {% if not empty_or_full_value %} display: none;
+                         {% endif %}">Vrij
+                 </button>
+                 <button id="vol"
+                         type="button"
+                         class="btn btn-danger btn-lg"
+                         style=";
+                         {% if empty_or_full_value %} display: none;
+                         {% endif %}">Vol
+                 </button>
             </div>
     </div>
     <div class="col-6 text-center">
-        <div class="bezet" style="margin-top: 30px; margin-right: 100px;">
-            <p style="font-size:20px;">Plaatsen beschikbaar</p>
+        <div class="bezet">
+            <p class="Plaatsen_beschikbaar">Plaatsen beschikbaar</p>
                 {% for data in graphQuery%}
                 {{data.sensorValue}}
                 {%endfor%}
-                <p style="font-size:200%"> {{graphQuery}}</p>
-            <p style="font-size:27px;" id="sensorValues">{{empty_or_full_value.count}}/{{sensor.count}}</p>
+            <p class="graphQuery"> {{graphQuery}}</p>
+            <p class="sensorValues"
+               id="sensorValues">
+                {{empty_or_full_value.count}}/{{sensor.count}}
+            </p>
         </div>
     </div>
 </div>
 
-<!-- hr -->
 <hr>
 
-<!-- 2ste row met:
-- De grafiek
-- De zoekoptie
+<!-- second row with:
+- Graph
+- Search option
  -->
 <div class="row">
     <div class="col-6 text-center">
-        <p style="font-size:20px;">Historische data van {{date}}</b></p>
-        <div align="center">
+        <p class="history">Historische data van {{date}}</b></p>
+        <div class="graphAlign">
             <div id="ParkeerGrafiek1">
                 <canvas id="myChart4"></canvas>
                 <script src="{% static 'node_modules/chart.js/dist/Chart.js' %}"></script>
-                <div class="chart-container" style="position: relative; height:10vh; width:45vw">
+                <div class="chart-container">
                     <script>
                         var canvas = document.getElementById("myChart4");
                         var ctx = canvas.getContext('2d');
@@ -93,20 +111,28 @@
             </div>
         </div>
     </div>
-    <div class="col-6 text-center" style="margin-top: 70px;">
-        <p style="font-size:20px;">De verwachte tijd dat parkeergarage vol is:<b> {{time_avg_1}}</b></p>
+    <div class="col-6 text-center">
+        <div class="timeAvg">
+        <p class="graphQuery">
+            De verwachte tijd dat parkeergarage vol is:<b> {{time_avg_1}}</b>
+        </p>
 
-    <div style="margin-top: 75px;">
+    <div class="datePicker">
         <form method="get" action="/">
-            <p style="font-size:20px;">Specifieke dag zoeken
-            <input type="date" name="date" data-date-inline-picker="true" required></p>
-            <button class="btn btn-warning text-white" type="submit" style="padding: 10px 20px; font-size: 20px; border-radius: 10px; width:120px; margin-top: 30px;">Zoeken</button>
+            <p class="graphQuery">Specifieke dag zoeken
+            <input type="date"
+                   name="date"
+                   data-date-inline-picker="true" required>
+            </p>
+            <button class="btn btn-warning text-white">
+                <div class="btn_warning">Zoeken</div>
+            </button>
         </form>
     </div>
 </div>
 </div>
 </div>
-<!--Grafiek-->
+<!--Graph-->
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -136,5 +162,8 @@
         }, 1000);
     });
 </script>
+ <script type="text/javascript"
+         src="https://www.gstatic.com/charts/loader.js">
+ </script>
 
 {% endblock %}
